@@ -7732,7 +7732,6 @@ MonoBehaviour:
   i: 0
   minScale: 5
   maxScale: 5
-  decal: {fileID: 0}
   duration: 1
   framesLength: 80
   getOwner: 1

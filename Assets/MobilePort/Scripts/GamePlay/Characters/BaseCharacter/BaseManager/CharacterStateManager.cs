@@ -26,9 +26,10 @@ namespace CharacterBehaviour
         public CharacterAnimationRiging rigs;
         public Health myHealth;
 
-        
-        public bool isDistanceFighting;
+        public float _moveRate = 15f;
 
+        public bool isDistanceFighting;
+        
         protected virtual void OnDestroy()
         {
 

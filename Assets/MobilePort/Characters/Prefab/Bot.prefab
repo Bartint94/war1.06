@@ -699,7 +699,12 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'upperarm_l'\n\tTransform 'upperarm_r'\n\tTransform
+    'thigh_l'\n\tTransform 'neck_01'\n\tTransform 'Root'\n\tTransform 'clavicle_r'\n\tTransform
+    'pelvis'\n\tTransform 'spine_01'\n\tTransform 'clavicle_l'\n\tTransform 'thigh_r'\n\tand
+    more ...\n\tFrom animation clip 'R'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -1410,6 +1415,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b4cdd451c072f7e438e7accdabb4b858, type: 2}
+    - target: {fileID: 2882887697908882662, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
+      propertyPath: m_Weight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3127383949518953006, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.90118223
@@ -1701,6 +1710,10 @@ PrefabInstance:
     - target: {fileID: 4090244863941173551, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.74296397
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147449984859783998, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
+      propertyPath: m_Weight
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4213776792668406533, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
       propertyPath: _addedNetworkObject

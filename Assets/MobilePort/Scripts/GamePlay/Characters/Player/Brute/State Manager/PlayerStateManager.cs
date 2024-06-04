@@ -32,9 +32,6 @@ namespace CharacterBehaviour
         }
         #endregion
 
-        #region Serialized.
-        [SerializeField] float _moveRate = 15f;
-        #endregion
 
         public enum CameraStyle {Fps, Rpg}
         public CameraStyle currentCameraStyle = CameraStyle.Fps;
