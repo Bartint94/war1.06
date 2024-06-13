@@ -13,10 +13,8 @@ namespace CharacterBehaviour
 
         public Transform targetTransform;
 
-        public float move;
 
-        [SerializeField] float _moveRate = 11f;
-        [SerializeField] float maxMoveVelocity = 13f;
+
 
         public EnemyAttackState attackState;
 
@@ -29,32 +27,22 @@ namespace CharacterBehaviour
             base.Awake();
             SwitchCurrentState(standardState);
         }
-       public void Death()
+        public override void SwitchCurrentState(CharacterState state, string debug = "charscter")
+        {
+            if(IsServer)
+            base.SwitchCurrentState(state, debug);
+        }
+        public void Death()
         {
             OnDeath?.Invoke();
         }
-        private void Init()
-        {
-            //inve
-        }
+
 
         void Update()
         {
+            if(IsServer)
             currentState.UpdateOwnerState();
 
-
-            Vector3 forces = (transform.forward * move);
-            _rigidbody.AddForce(0, -9.80665f, 0);
-            if (_rigidbody.velocity.magnitude < maxMoveVelocity)
-            {
-                _rigidbody.AddForce(forces * _moveRate);
-                
-            }
-            if(isDash)
-            {
-                _rigidbody.AddForce(dashDir * 10f,ForceMode.Impulse);
-                isDash = false;
-            }
         }
         protected virtual void OnTriggerEnter(Collider other)
         {

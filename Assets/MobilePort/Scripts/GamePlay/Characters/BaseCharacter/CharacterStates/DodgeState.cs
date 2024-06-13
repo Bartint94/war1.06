@@ -25,6 +25,11 @@ namespace CharacterBehaviour
             
         }
 
+        public override void BeforeSwitchState()
+        {
+            
+        }
+
         public override void InitState()
         {
             if(IsOwner)

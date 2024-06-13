@@ -118,6 +118,7 @@ namespace CharacterBehaviour
         public abstract void TriggerStay(Collider other);
         public abstract void TriggerExit(Collider other);
         public abstract void AnimationEnd();
+        public abstract void BeforeSwitchState();
 
 
         Ray ray;

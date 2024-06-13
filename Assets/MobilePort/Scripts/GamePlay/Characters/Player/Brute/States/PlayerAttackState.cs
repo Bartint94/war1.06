@@ -12,6 +12,7 @@ namespace CharacterBehaviour
     public class PlayerAttackState : CharacterState
     {
         public float speed;
+        public float dashSpeed;
 
         public float acceleration;
 
@@ -28,7 +29,7 @@ namespace CharacterBehaviour
 
         [SerializeField] float maxJumpForce = 15f;
         [SerializeField] float maxDashForce = 15f;
-        [SerializeField] float duration;
+        float duration = 1.55f;
 
         
         RectTransform cooldown;
@@ -62,6 +63,9 @@ namespace CharacterBehaviour
             var lastId = currentId;
             currentId = Random.Range(1, attacksCount);
             
+                IsDash = true;
+            
+            
             if(currentId == lastId)
             {
                 if(currentId == 1)
@@ -84,6 +88,9 @@ namespace CharacterBehaviour
         {
             if (!IsOwner) return;
 
+            Debug.Log(characterAnimations.RootMotionUpdate() + " dash");
+            DashForce = characterAnimations.RootMotionUpdate() * dashSpeed;
+
             elapsed += Time.deltaTime;
             UpdateCooldownBar(elapsed);
             if (elapsed > duration) 
@@ -98,7 +105,7 @@ namespace CharacterBehaviour
 
             rigs.UpdateRotationServer(RigPart.aim, rigs.aimSource.rotation);
 
-
+            /*
 
             if (!isDash)
             {
@@ -119,7 +126,7 @@ namespace CharacterBehaviour
 
             }
 
-
+            */
             if (playerInputs.isJumpStarted)
             {
                 BeforeSwitchState();
@@ -144,9 +151,11 @@ namespace CharacterBehaviour
       
         void CancelAttackState()
         {
-                HitEnd();
-                End();
+            IsDash = false;    
+            HitEnd();
+            End();
             BeforeSwitchState();
+            playerManager.SwitchCurrentState(playerManager.standardState);
 
         }
 
@@ -160,14 +169,12 @@ namespace CharacterBehaviour
             //BeforeSwitchState();
         }
 
-        void BeforeSwitchState()
+        public override void BeforeSwitchState()
         {
             if (IsOwner)
             {
                 characterAnimations.AttackIdServer(0);
-                Debug.Log(stopAnimationEvents);
-                if (stopAnimationEvents) return;
-                playerManager.SwitchCurrentState(playerManager.standardState,"attack");
+                
             }
 
 

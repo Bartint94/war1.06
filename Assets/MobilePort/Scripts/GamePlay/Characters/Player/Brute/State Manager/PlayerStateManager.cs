@@ -276,7 +276,7 @@ namespace CharacterBehaviour
             md = new MoveData(isJump, isDash, isGrounded, sprint, isMaxSpeed, playerRotX, playerRotZ, isGetHit, isDodge, isStoped, rootEulerY, horizontal, vertical,maxSpeed, jumpForce, dashForce);
             currentState.IsJump = false;
             currentState.IsSprint = false;
-            currentState.IsDash = false; 
+            //currentState.IsDash = false; 
             currentState.IsGetHit = false;
             currentState.IsDodge = false;
             currentState.IsStoped = false;
@@ -299,27 +299,37 @@ namespace CharacterBehaviour
                 maxSpeed = md.MaxSpeed;
             }
 
-            if (!md.IsMaxSpeed)
+            if (md.Dash)
             {
-                //float delta = (float)base.TimeManager.TickDelta;
+                _rigidbody.velocity = (transform.forward * md.DashForce) + Vector3.up * -9.8f;
+            }
+            else
+            {
+                if (!md.IsMaxSpeed)
+                {
+                    //float delta = (float)base.TimeManager.TickDelta;
 
 
-                locomotionForces = (transform.forward * md.Vertical) + (transform.right * md.Horizontal);// * _moveRate;
-                                                                                                       // locomotionForces.Normalize();
-                if (!md.IsStoped)
-                    _rigidbody.AddForce(locomotionForces * _moveRate, ForceMode.Force);
+                    locomotionForces = (transform.forward * md.Vertical) + (transform.right * md.Horizontal);// * _moveRate;
+                                                                                                             // locomotionForces.Normalize();
+
+                    if (!md.IsStoped)
+                    {
+                        _rigidbody.AddForce(locomotionForces * _moveRate, ForceMode.Force);
+                    }
+                }
 
             }
-         //   if (md.RootEulerY != 0)
+            //   if (md.RootEulerY != 0)
             {
                 rotationTarget = Quaternion.Euler(md.PlayerRotX*10, md.RootEulerY, md.PlayerRotZ*10);
                 transform.rotation = rotationTarget;
-                Debug.Log(md.PlayerRotX*10);
+
             }
             if (md.Jump)
                 _rigidbody.AddForce(new Vector3(0f, md.JumpForce, 0f), ForceMode.Impulse);
 
-            if (md.Dash)
+          /*  if (md.Dash)
             {
                 if (md.IsGetHit)
                 {
@@ -338,7 +348,7 @@ namespace CharacterBehaviour
 
                 // _rigidbody.AddForce(dashDir * md.DashForce, ForceMode.Impulse);
             }
-
+          */
             if (!md.IsGrounded)
             {
                 _rigidbody.AddForce(0, -9.80665f, 0);

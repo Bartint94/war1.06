@@ -98,6 +98,10 @@ namespace CharacterBehaviour
             rigs.UpdateSourcePositionServer(lerpPos,RigPart.blockRightArm);
         }
 
+        public override void BeforeSwitchState()
+        {
+      
+        }
     }
 
 }

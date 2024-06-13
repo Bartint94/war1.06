@@ -21,24 +21,31 @@ namespace CharacterBehaviour
         [SerializeField] Collider leftWeaponCollider;
 
         float elapsed;
-        /*
-          private void HitEnd()
-          {
-              if(currentId == 1)
-                  rightWeaponCollider.enabled = false;
-              if(currentId == 2)
-                  leftWeaponCollider.enabled = false;
-          }
 
-          private void Dash()
-          {
-              if (currentId == 1)
-                  rightWeaponCollider.enabled = true;
-              if (currentId == 2)
-                  leftWeaponCollider.enabled = true;
-              _rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
-          }
-          */
+        public float move;
+
+        [SerializeField] float _moveRate = 11f;
+        [SerializeField] float maxMoveVelocity = 13f;
+        [SerializeField] float dashSpeed;
+
+        /*
+private void HitEnd()
+{
+if(currentId == 1)
+rightWeaponCollider.enabled = false;
+if(currentId == 2)
+leftWeaponCollider.enabled = false;
+}
+
+private void Dash()
+{
+if (currentId == 1)
+rightWeaponCollider.enabled = true;
+if (currentId == 2)
+leftWeaponCollider.enabled = true;
+_rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
+}
+*/
         public void Dash()
         {
             if (IsOwner)
@@ -93,7 +100,7 @@ namespace CharacterBehaviour
             currentId = Random.Range(1, attacksCount);
             characterAnimations.standardAttackId = currentId;
             dashForce = .5f * maxDashForce;
-            enemyManager.move = .5f;
+            move = .5f;
         }
 
         public override void TriggerEneter(Collider other)
@@ -113,12 +120,31 @@ namespace CharacterBehaviour
 
         public override void UpdateOwnerState()
         {
-           
+            /* Vector3 forces = (transform.forward * move);
+             _rigidbody.AddForce(0, -9.80665f, 0);
+             if (_rigidbody.velocity.magnitude < maxMoveVelocity)
+             {
+                 _rigidbody.AddForce(forces * _moveRate);
 
+             }
+            */
+            /*    if (isDash)
+                {
+                    _rigidbody.AddForce(dashDir * 10f, ForceMode.Impulse);
+                    isDash = false;
+                }
+            */
+
+
+            DashForce = characterAnimations.RootMotionUpdate() * dashSpeed;
+            _rigidbody.velocity = (transform.forward * DashForce) + Vector3.up * -9.8f;
+            
             elapsed += Time.deltaTime;
             if(elapsed > 1f)
             {
+                characterAnimations.AttackIdObservers(0);
                 enemyManager.SwitchCurrentState(enemyManager.standardState);
+
             }
 
             characterAnimations.UpdateAnimatorParameters();
@@ -126,7 +152,7 @@ namespace CharacterBehaviour
 
           
         }
-
+      
         public override void UpdateServerState()
         {
             
@@ -138,10 +164,11 @@ namespace CharacterBehaviour
             enemyManager.SwitchCurrentState(enemyManager.standardState);
         }
 
-        void BeforeSwitchState()
+      
+        public override void BeforeSwitchState()
         {
-            characterAnimations.standardAttackId = 0;
-
+            characterAnimations.AttackIdObservers(0);
+            
         }
     }
 

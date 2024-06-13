@@ -86,5 +86,10 @@ namespace CharacterBehaviour
         {
           
         }
+
+        public override void BeforeSwitchState()
+        {
+            
+        }
     }
 }

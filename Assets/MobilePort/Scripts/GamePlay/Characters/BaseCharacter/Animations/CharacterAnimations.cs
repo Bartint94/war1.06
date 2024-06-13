@@ -52,6 +52,7 @@ public class CharacterAnimations : NetworkBehaviour
         base.OnStartClient();
         
         state = GetComponent<CharacterState>();
+        
     }
 
     
@@ -141,6 +142,10 @@ public class CharacterAnimations : NetworkBehaviour
     {
         _animator.SetFloat("speedMultipiler", 1f);
     }
+    public float RootMotionUpdate()
+    {
+        return _animator.GetFloat("mSpeed");
+    }
 
     public void UpdateAnimatorParameters()
     {
@@ -186,7 +191,7 @@ public class CharacterAnimations : NetworkBehaviour
         AttackIdObservers(id);
     }
     [ObserversRpc(BufferLast = true, ExcludeOwner = false)]
-    void AttackIdObservers(int id)
+    public void AttackIdObservers(int id)
     {
         standardAttackId = id;
         //StartCoroutine(ResetAttackId());

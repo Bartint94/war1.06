@@ -21750,6 +21750,63 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300008, guid: 3493363b5f21df84dade2750c0ef9fb3, type: 3}
+--- !u!1001 &607216929466195176
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 272.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 83.326
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -61.927032
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8539698982875918626, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063716722168900504, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
+      propertyPath: m_Name
+      value: ced5a6a550d8_a_mythical_battle_a
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d31de3dc8e6b27499dd405ac1210f0d, type: 3}
 --- !u!1001 &4453462824474901548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21905,3 +21962,4 @@ SceneRoots:
   - {fileID: 1862963589}
   - {fileID: 1496202460}
   - {fileID: 2076221006}
+  - {fileID: 607216929466195176}

@@ -110,5 +110,9 @@ namespace CharacterBehaviour
            inventory.WeaponTriggerToggleServer(false, WeaponState.deffence);
         }
 
+        public override void BeforeSwitchState()
+        {
+          
+        }
     }
 }

@@ -28,8 +28,8 @@ public class HitBox : NetworkBehaviour
     }
     private void Start()
     {
-        //spawner = Spawner.instance;
-        poolzSystem = PoolzSystem.instance;//GetComponentInParent<PoolzSystem>();
+
+        poolzSystem = PoolzSystem.instance;
         body = manager.body;
     }
 
@@ -42,7 +42,6 @@ public class HitBox : NetworkBehaviour
             {
                 if (!manager.CheckHitValidation(weapon))
                 {
-                    //Debug.Log("My Weapon  ");
                     return;
                 }
 
@@ -91,12 +90,4 @@ public class HitBox : NetworkBehaviour
         manager.SwitchCurrentState(manager.getHitState);
         manager.myHealth.UpdateHealth(-20);
     }
-   
-    void RestartFx()
-    {
-        bloodPs.transform.SetParent(transform.parent,true);
-        bloodPs.transform.localPosition = Vector3.zero;
-        //bloodPs.transform.localRotation = Quaternion.identity;
-    }
- 
 }

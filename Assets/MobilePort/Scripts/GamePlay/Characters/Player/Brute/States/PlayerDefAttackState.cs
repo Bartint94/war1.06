@@ -118,12 +118,6 @@ namespace CharacterBehaviour
            // playerManager.SwitchCurrentState(playerManager.standardState);
         }
 
-        void BeforeSwitchState()
-        {
-
-            //characterAnimations.standardAttackId = 0;
-            AttackIdServer(0);
-        }
         void OnDash()
         {
             if (!IsOwner) return;
@@ -160,6 +154,11 @@ namespace CharacterBehaviour
         public override void TriggerExit(Collider other)
         {
 
+        }
+
+        public override void BeforeSwitchState()
+        {
+            AttackIdServer(0);
         }
     }
 

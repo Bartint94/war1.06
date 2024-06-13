@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482b5d857b3e1894c8d016677f86d460, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  playerName: kgjkj
+  playerName: adwa
   baseSkin:
   - {fileID: 2800000, guid: 4f48b57acdf9e194b8d2f3205b91dc02, type: 3}
   - {fileID: 2800000, guid: 98f56a3b110fc184d97010e205534960, type: 3}
@@ -21,6 +21,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 3414628670493979189, guid: ba05b5fda114e3a4b9d74059a89575fb, type: 3}
   - {fileID: 8833589381127762831, guid: aec028f22adc08e468d3d73cd4463b65, type: 3}
+  - {fileID: 8122261309510038630, guid: 7a5fd2177a3fc5f48b861ab6dd07d636, type: 3}
   currentWeaponId: 0
   headProtections:
   - {fileID: 11400000, guid: f85abedcf0737ec4caea6deba15afaba, type: 2}
@@ -30,7 +31,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c03b95e82800f63489b2fa8f60226076, type: 2}
   - {fileID: 11400000, guid: 22524957df5fdbb4582ab2fff48b8194, type: 2}
   - {fileID: 11400000, guid: a9196159ccc0dc04eb77cc3b4d487c0e, type: 2}
-  currentTorsoProtectionId: 0
+  currentTorsoProtectionId: 1
   legsProtections:
   - {fileID: 11400000, guid: 353ab84b62866654e91b98a49b758720, type: 2}
   currentLegsProtectionId: 0

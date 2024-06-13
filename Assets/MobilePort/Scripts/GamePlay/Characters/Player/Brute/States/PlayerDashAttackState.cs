@@ -5,9 +5,9 @@ using UnityEngine;
 namespace CharacterBehaviour
 {
 
-    public class PlayerDashAttackState : CharacterState
+    public class PlayerDashAttackState : PlayerAttackState
     {
-        int attacksCount = 5;
+        
         int currentId;
 
         bool isDash;
@@ -98,16 +98,7 @@ namespace CharacterBehaviour
             BeforeSwitchState();
         }
 
-        void BeforeSwitchState()
-        {
-            //AttackIdServer(0);
-            if(IsOwner)
-            {
-                rigs.SetRigWeightServer(1f, RigPart.aim, .5f);
-                playerManager.SwitchCurrentState(playerManager.standardState);
-            }
-            characterAnimations.dashAttackId = 0;
-        }
+   
         public void DashD()
         {
             if (IsOwner)
@@ -166,6 +157,17 @@ namespace CharacterBehaviour
         public override void AnimationEnd()
         {
             //throw new System.NotImplementedException();
+        }
+
+        public override void BeforeSwitchState()
+        {
+            //AttackIdServer(0);
+            if (IsOwner)
+            {
+                rigs.SetRigWeightServer(1f, RigPart.aim, .5f);
+                playerManager.SwitchCurrentState(playerManager.standardState);
+            }
+            characterAnimations.dashAttackId = 0;
         }
     }
 }

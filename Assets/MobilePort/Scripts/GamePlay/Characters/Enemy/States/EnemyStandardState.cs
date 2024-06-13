@@ -11,7 +11,10 @@ namespace CharacterBehaviour
     {
         Transform targetTransform;
         EnemyTarget enemyTarget;
-        
+        public float maxMoveVelocity;
+        public float _moveRate;
+        public float attackDistance;
+
         protected override void Awake()
         {
             base.Awake();
@@ -21,10 +24,11 @@ namespace CharacterBehaviour
             enemyTarget = enemyManager.enemyTarget; 
             targetTransform = enemyTarget.transform; 
         }
-        public override void InitState()
+        public override async void InitState()
         {
-            
+           // await enemyTarget.LookForCloserTarget();
         }
+      
         void Die()
         {
             enemyManager.SwitchCurrentState(enemyManager.dyingState);
@@ -42,9 +46,16 @@ namespace CharacterBehaviour
           
 
             transform.rotation = Quaternion.LookRotation(new Vector3(targetTransform.position.x, transform.position.y ,targetTransform.position.z) - transform.position);
-            enemyManager.move = 1f;
+            
+            _rigidbody.AddForce(0, -9.80665f, 0);
+            if (_rigidbody.velocity.magnitude < maxMoveVelocity)
+            {
+                _rigidbody.AddForce(transform.forward * _moveRate);
 
-            if (enemyTarget.ownerDistance < 6f && enemyTarget.isTargetSpotted)
+            }
+
+
+            if (enemyTarget.ownerDistance < attackDistance && enemyTarget.isTargetSpotted)
             {
                 enemyManager.SwitchCurrentState(enemyManager.attackState);
 
@@ -78,6 +89,10 @@ namespace CharacterBehaviour
         {
           
         }
-      
+
+        public override void BeforeSwitchState()
+        {
+     
+        }
     }
 }

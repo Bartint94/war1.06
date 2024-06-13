@@ -25,7 +25,7 @@ public class CustomizeUI : UiButtons
     public override void LeftButton()
     {
         base.LeftButton();
-        baseSkin.materials[0].mainTexture = playerData.baseSkin[buttonId];
+        baseSkin.materials[0].SetTexture("_BaseMap",playerData.baseSkin[buttonId]);
 
         playerData.currentBaseSkinId = buttonId;
 /*
@@ -42,8 +42,8 @@ public class CustomizeUI : UiButtons
     public override void RightButton()
     {
         base.RightButton();
- 
-        baseSkin.materials[0].mainTexture = playerData.baseSkin[buttonId];
+
+        baseSkin.materials[0].SetTexture("_BaseMap", playerData.baseSkin[buttonId]);
 
         playerData.currentBaseSkinId = buttonId;
 /*

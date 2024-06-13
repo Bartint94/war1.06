@@ -1,10 +1,12 @@
 using CharacterBehaviour;
+using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyTarget : MonoBehaviour
+public class EnemyTarget : NetworkBehaviour
 {
     [SerializeField] float randDistance = 10f;
 
@@ -15,14 +17,18 @@ public class EnemyTarget : MonoBehaviour
     public float ownerDistance;
     public float ownerY;
 
-    public List<Transform> nearPlayers;
+    public List<Transform> nearTargets;
     //public List<Transform> spottedPlayers;
 
     public float angle;
 
     public bool isTargetSpotted = false;
-    void Start()
+    public override void OnStartServer()
     {
+        base.OnStartServer();
+    
+    
+        if (!IsServer) return;
         ownerTransform = ownerManager.transform;
         transform.SetParent(null);
     }
@@ -30,6 +36,8 @@ public class EnemyTarget : MonoBehaviour
 
     void Update()
     {
+        if (!IsServer) return;
+
         ownerDistance = Vector3.Distance(transform.position, ownerTransform.position);
         ownerY = ownerTransform.position.y;
         if(isTargetSpotted)
@@ -41,7 +49,7 @@ public class EnemyTarget : MonoBehaviour
             if (transform.position.y != ownerY)
                 transform.position = new Vector3(transform.position.x, ownerY, transform.position.z);
         }
-        if(nearPlayers.Count > 0)
+        if(nearTargets.Count > 0)
         {
             VisibilityAngleCalculation();
         }
@@ -50,7 +58,7 @@ public class EnemyTarget : MonoBehaviour
     }
     void VisibilityAngleCalculation()
     {
-        foreach (Transform t in nearPlayers)
+        foreach (Transform t in nearTargets)
         {
             Vector3 dir = (t.position - ownerTransform.position).normalized;
             angle = Vector3.Dot(ownerTransform.forward, dir);
@@ -73,18 +81,43 @@ public class EnemyTarget : MonoBehaviour
         currentTargetManager = target.GetComponent<CharacterStateManager>();
         isTargetSpotted = true;
     }
+
+    public async Task LookForCloserTarget()
+    {
+       
+            float closerDist = 100f;  
+            Transform closerTarget = null;
+            foreach (Transform target in nearTargets)
+            {
+                float dist = Vector3.Distance(transform.position, target.position);
+                if(dist<closerDist)
+                {
+                    closerDist = dist;
+                    closerTarget = target;
+                }
+                await Task.Yield();
+            }
+            if(closerTarget != null)
+            {
+                PlayerSpotted(closerTarget);
+            }
+       
+        
+    }
+ 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out CharacterStateManager characterManager))
         {
-            nearPlayers.Add(characterManager.transform);
+            nearTargets.Add(characterManager.transform);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out CharacterStateManager characterManager))
         {
-            nearPlayers.Remove(characterManager.transform);
+            nearTargets.Remove(characterManager.transform);
         }
     }
 }

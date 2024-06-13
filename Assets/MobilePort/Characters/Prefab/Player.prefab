@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb90b913935e644baaa86c076d788e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_ConstrainedObject: {fileID: 6950640275992984160}
     m_SourceObjects:
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb90b913935e644baaa86c076d788e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_ConstrainedObject: {fileID: 5270766254405063707}
     m_SourceObjects:
@@ -624,7 +624,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1040166157536698780}
-  - component: {fileID: 6380277440351314595}
   - component: {fileID: 4951194793920919817}
   - component: {fileID: 5529853056264495940}
   - component: {fileID: 1398490485754560506}
@@ -674,21 +673,6 @@ Transform:
   - {fileID: 5942657605376050217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6380277440351314595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6124020649145926685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de4cd09f140a0804b9ec63a236a1fe89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 1398490485754560506}
-  _networkObjectCache: {fileID: 0}
 --- !u!136 &4951194793920919817
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -708,7 +692,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.24
+  m_Radius: 0.09
   m_Height: 1.7524307
   m_Direction: 1
   m_Center: {x: 0.0000000026091498, y: 0.8825738, z: -0.030000003}
@@ -888,12 +872,12 @@ MonoBehaviour:
   stopAnimationEvents: 0
   IsGrounded: 0
   speed: 1
+  dashSpeed: 25
   acceleration: 4
   shakeDuration: 0.3
-  attacksCount: 5
+  attacksCount: 2
   maxJumpForce: 3
   maxDashForce: 3
-  duration: 0.3
   rotCon: {fileID: 0}
 --- !u!114 &3962961824585683380
 MonoBehaviour:
@@ -922,17 +906,17 @@ MonoBehaviour:
   _rigidbody2d: {fileID: 0}
   _spectatorSmoothPosition: 1
   _spectatorSmoothRotation: 1
-  _spectatorSmoothingType: 0
+  _spectatorSmoothingType: 1
   _customSmoothingData:
     InterpolationPercent: 1
     CollisionInterpolationPercent: 0.1
     InterpolationDecreaseStep: 1
     InterpolationIncreaseStep: 3
   _preconfiguredSmoothingDataPreview:
-    InterpolationPercent: 0.5
-    CollisionInterpolationPercent: 0.05
+    InterpolationPercent: 1
+    CollisionInterpolationPercent: 0.1
     InterpolationDecreaseStep: 1
-    InterpolationIncreaseStep: 2
+    InterpolationIncreaseStep: 3
   _maintainedVelocity: 1
   _resendType: 0
   _resendInterval: 30
@@ -1220,18 +1204,13 @@ Animator:
   m_GameObject: {fileID: 6124020649145926685}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1d38f48126a8ca549a5805bccfdc01ba, type: 3}
-  m_Controller: {fileID: 9100000, guid: b3aa0203f12071843ae67e1a0ddd4fc7, type: 2}
+  m_Controller: {fileID: 9100000, guid: c9b75da194d9dc24c8cff8526f146609, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'hand_r'\n\tTransform 'upperarm_l'\n\tTransform
-    'upperarm_r'\n\tTransform 'thigh_l'\n\tTransform 'lowerarm_r'\n\tTransform 'neck_01'\n\tTransform
-    'Root'\n\tTransform 'clavicle_r'\n\tTransform 'spine_03'\n\tTransform 'pelvis'\n\tand
-    more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -1405,6 +1384,14 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 1398490485754560506}
   stopAnimationEvents: 0
   IsGrounded: 0
+  speed: 0
+  dashSpeed: 0
+  acceleration: 0
+  shakeDuration: 0
+  attacksCount: 6
+  maxJumpForce: 10
+  maxDashForce: 5
+  rotCon: {fileID: 0}
   maxJumpForce: 10
   maxDashForce: 5
 --- !u!114 &5016582217619899500

@@ -37,30 +37,35 @@ namespace CharacterBehaviour
         public override void InitState()
         {
 
-                weight = 1f;
-                shaderHealth += .01f;
-                BloodShadersServer(shaderHealth);
-                inventory.WeaponTriggerToggleServer(false, WeaponState.deffence);
-            if(IsServer)
+            weight = 1f;
+            shaderHealth += .01f;
+            BloodShadersServer(shaderHealth);
+            inventory.WeaponTriggerToggleServer(false, WeaponState.deffence);
+            if(playerManager != null)
+            playerManager.attackState.BeforeSwitchState();
+            if (enemyManager != null)
+                enemyManager.attackState.BeforeSwitchState();
+
+            if (IsServer)
             {
             }
             //characterAnimations.AttackIdServer(0);
             if (IsOwner)
             {
-                
-               
+
+
                 stopAnimationEvents = true;
-               // IsGetHit = true;
-               // characterAnimations.isGetHit = true;
+                // IsGetHit = true;
+                // characterAnimations.isGetHit = true;
 
 
-              //  DashForce = 10f; // hard coded
-               // IsDash = true;
+                //  DashForce = 10f; // hard coded
+                // IsDash = true;
             }
-          
-            
+
+
         }
-           
+
         public override void AnimationEnd()
         {
             
@@ -135,6 +140,11 @@ namespace CharacterBehaviour
         public override void TriggerStay(Collider other)
         {
             
+        }
+
+        public override void BeforeSwitchState()
+        {
+          
         }
     }
 }
