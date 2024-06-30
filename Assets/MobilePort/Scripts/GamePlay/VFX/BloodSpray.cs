@@ -17,13 +17,13 @@ public class BloodSpray : MonoBehaviour, ISpawnable
     float t;
     [SerializeField] float alembicSpeed;
     [SerializeField] bool hasParent;
-    public void Init(Vector3 position, Quaternion rotation, Transform owner, Inventory inventory = null)
+    public void Init(Vector3 position, Quaternion rotation, GameObject owner, Inventory inventory = null)
     {
         transform.position = position;
         transform.rotation= rotation;
         if(owner)
-        offset = position - owner.position;
-        this.owner = owner;
+        offset = position - owner.transform.position;
+        this.owner = owner.transform;
         t = 0f;
         if(anim != null)
         {

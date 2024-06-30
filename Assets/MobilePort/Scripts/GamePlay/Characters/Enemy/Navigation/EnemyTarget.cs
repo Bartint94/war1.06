@@ -82,30 +82,6 @@ public class EnemyTarget : NetworkBehaviour
         isTargetSpotted = true;
     }
 
-    public async Task LookForCloserTarget()
-    {
-       
-            float closerDist = 100f;  
-            Transform closerTarget = null;
-            foreach (Transform target in nearTargets)
-            {
-                float dist = Vector3.Distance(transform.position, target.position);
-                if(dist<closerDist)
-                {
-                    closerDist = dist;
-                    closerTarget = target;
-                }
-                await Task.Yield();
-            }
-            if(closerTarget != null)
-            {
-                PlayerSpotted(closerTarget);
-            }
-       
-        
-    }
- 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out CharacterStateManager characterManager))

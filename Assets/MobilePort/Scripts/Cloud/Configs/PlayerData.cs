@@ -10,6 +10,8 @@ public class PlayerData : ScriptableObject
     public int currentBaseSkinId;
     public Weapon[] weapons;
     public int currentWeaponId;
+    public Arrows[] arrows;
+    public int currentArrowId;
     public ProtectionItemConfig[] headProtections;
     public int currentHeadProtectionId;
     public ProtectionItemConfig[] torsoProtections;
@@ -18,6 +20,7 @@ public class PlayerData : ScriptableObject
     public int currentLegsProtectionId;
     public ProtectionItemConfig[] feetProtections;
     public int currentFeetProtectionId;
+
 
     
 }

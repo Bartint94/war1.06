@@ -74,7 +74,7 @@ namespace CharacterBehaviour
         protected void Start()
         {
 
-            Cursor.lockState = CursorLockMode.Locked;
+            
         }
 
         protected override void OnDestroy()
@@ -203,6 +203,7 @@ namespace CharacterBehaviour
             public bool IsGetHit;
             public bool IsDodge;
             public bool IsStoped;
+            public bool IsProjectile;
 
 
             public float RootEulerY;
@@ -216,7 +217,12 @@ namespace CharacterBehaviour
             public float JumpForce;
             public float DashForce;
 
-            public MoveData(bool jump,bool dahs, bool isGrounded, bool sprint,bool isMaxSpeed,float playerRotX,float playerRotZ, bool isGetHit, bool isDodge, bool isStoped,float camEulerY, float horizontal, float vertical, float maxSpeed, float jumpForce, float dashForce) { 
+            public Vector3 AimPos;
+            public Quaternion AimRot;
+
+            public MoveData(bool jump,bool dahs, bool isGrounded, bool sprint,bool isMaxSpeed,float playerRotX,
+                float playerRotZ, bool isGetHit, bool isDodge, bool isStoped, bool isProjectile, float camEulerY, 
+                float horizontal, float vertical, float maxSpeed, float jumpForce, float dashForce, Vector3 aimPos, Quaternion aimRot) { 
                 Jump = jump;
                 Dash = dahs;
                 IsGrounded = isGrounded;
@@ -225,6 +231,7 @@ namespace CharacterBehaviour
                 IsGetHit = isGetHit;
                 IsDodge = isDodge;
                 IsStoped = isStoped;
+                IsProjectile = isProjectile;
                 
 
                 RootEulerY = camEulerY;
@@ -238,6 +245,9 @@ namespace CharacterBehaviour
                 PlayerRotZ = playerRotZ;
                 JumpForce = jumpForce;
                 DashForce = dashForce;
+                AimPos = aimPos;
+                AimRot = aimRot;
+
                 _tick = 0;
             }
 
@@ -258,6 +268,7 @@ namespace CharacterBehaviour
             bool isGetHit = currentState.IsGetHit;
             bool isDodge = currentState.IsDodge;
             bool isStoped = currentState.IsStoped;
+            bool isProjectile = currentState.IsProjectile;
 
             float rootEulerY = currentState.RootEulerY;
 
@@ -270,16 +281,21 @@ namespace CharacterBehaviour
             float playerRotZ = currentState.PlayerRotZ;
             float jumpForce = currentState.JumpForceValue;
             float dashForce = currentState.DashForce;
+
+            Vector3 aimPos = distanceAttackState.aim.position;
+            Quaternion aimRot = distanceAttackState.aim.rotation;
+
             // if (horizontal == 0f && vertical == 0f && !_jump)
             //   return;
 
-            md = new MoveData(isJump, isDash, isGrounded, sprint, isMaxSpeed, playerRotX, playerRotZ, isGetHit, isDodge, isStoped, rootEulerY, horizontal, vertical,maxSpeed, jumpForce, dashForce);
+            md = new MoveData(isJump, isDash, isGrounded, sprint, isMaxSpeed, playerRotX, playerRotZ, isGetHit, isDodge, isStoped, isProjectile, rootEulerY, horizontal, vertical,maxSpeed, jumpForce, dashForce, aimPos, aimRot);
             currentState.IsJump = false;
             currentState.IsSprint = false;
             //currentState.IsDash = false; 
             currentState.IsGetHit = false;
             currentState.IsDodge = false;
             currentState.IsStoped = false;
+            currentState.IsProjectile = false;
            
             //isJump = false;
         }
@@ -289,6 +305,10 @@ namespace CharacterBehaviour
         [Replicate]
         private void Move(MoveData md, bool asServer, Channel channel = Channel.Unreliable, bool replaying = false)
         {
+            if(md.IsProjectile)
+            {
+                distanceAttackState.arrow.ShotObserver(md.AimPos, md.AimRot);
+            }
 
             if (md.Sprint)
             {

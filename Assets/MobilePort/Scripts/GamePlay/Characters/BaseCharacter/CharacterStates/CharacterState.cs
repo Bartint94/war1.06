@@ -25,6 +25,8 @@ namespace CharacterBehaviour
         protected PlayerLook playerLook;
         protected Inventory inventory;
         protected CameraController cameraController;
+        protected CharacterLoad characterLoad;
+        protected PlayerData playerData => characterLoad.playerData;
 
         protected Rigidbody _rigidbody;
         protected Animator animator;
@@ -54,6 +56,7 @@ namespace CharacterBehaviour
         public float AimY { get; internal set; }
         public float PlayerRotX { get; internal set; }
         public float PlayerRotZ { get; internal set; }
+        public bool IsProjectile { get; internal set; }
         #endregion
 
 
@@ -72,10 +75,11 @@ namespace CharacterBehaviour
             characterManager = GetComponent<CharacterStateManager>();
             animator = GetComponentInChildren<Animator>();
             _rigidbody = GetComponent<Rigidbody>();
-            poolzSystem = PoolzSystem.instance;
             playerLook = GetComponent<PlayerLook>();
             inventory = GetComponent<Inventory>();  
-            cameraController = GetComponentInChildren<CameraController>();  
+            cameraController = GetComponentInChildren<CameraController>(); 
+            characterLoad = GetComponent<CharacterLoad>();
+            
 
 
             if (TryGetComponent(out PlayerStateManager playerManager))
@@ -86,6 +90,11 @@ namespace CharacterBehaviour
             {
                 this.enemyManager = enemyManager;
             }
+        }
+        private void Start()
+        {
+            
+            poolzSystem = PoolzSystem.instance;
         }
         private void Update()
         {

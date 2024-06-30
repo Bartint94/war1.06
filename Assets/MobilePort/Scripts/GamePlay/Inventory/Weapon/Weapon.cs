@@ -4,8 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponState { attack, deffence}
-public class Weapon : Item
+public enum WeaponState { attack, deffence }
+public interface IOffensive
+{
+    public bool CheckTarget(CharacterStateManager manager);
+}
+public class Weapon : Item, IOffensive
 {
     Collider _collider;
 
@@ -40,7 +44,7 @@ public class Weapon : Item
     {
         _collider = GetComponent<Collider>();
     }
-    
+
     public override void Init(Inventory inventory)
     {
         base.Init(inventory);
@@ -61,7 +65,7 @@ public class Weapon : Item
             inventory.itemHolders[1].item = this;
             inventory.itemHolders[1].isEquiped = true;
 
-            transform.SetParent(inventory.itemHolders[1].transform,true);
+            transform.SetParent(inventory.itemHolders[1].transform, true);
             transform.localPosition = holdPosition;
             transform.localEulerAngles = holdRotation;
 
@@ -80,30 +84,30 @@ public class Weapon : Item
             inventory.ChangeAnimator(controller);
         }
     }
-    public void ToggleWeaponTrigger(bool trigger, Vector3 source,WeaponState weaponState)
+    public void ToggleWeaponTrigger(bool trigger, Vector3 source, WeaponState weaponState)
     {
         currentWeaponState = weaponState;
         _collider.enabled = trigger;
         _currentSource = source;
         currentOpponent = null;
-        if(trigger)
+        if (trigger)
         {
             CheckHitedReset();
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(!IsServer) { return; }
+        if (!IsServer) { return; }
         if (other.TryGetComponent(out Weapon opponrntWeapon))
         {
             currentOpponent = opponrntWeapon.manager;
             //attackState.AttackBlocked();
-            CheckHitedTest(other.gameObject);
+            //      CheckHitedTest(other.gameObject);
         }
-        if(other.TryGetComponent(out HitBox hitBox))
+        if (other.TryGetComponent(out HitBox hitBox))
         {
             CheckHitedTest(other.gameObject);
-            
+
         }
 
     }
@@ -111,14 +115,24 @@ public class Weapon : Item
     void CheckHitedTest(GameObject other)
     {
         hitedObjects.Add(other);
-       
+
     }
     [ObserversRpc]
     void CheckHitedReset()
     {
         hitedObjects.Clear();
     }
+
+    public bool CheckTarget(CharacterStateManager manger)
+    {
+        if(manger == this.manager)
+        {
+            return false;
+        }
+        else
+        return true;
+    }
 }
 
-  
+
 

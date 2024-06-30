@@ -60,9 +60,8 @@ public class Hud : MonoBehaviour
             return;
         }
         playerInputs.isMobile = isMobile.isOn;
+   
+
     }
-    private void Update()
-    {
-        Debug.Log(playerInputs);
-    }
+ 
 }

@@ -157,7 +157,6 @@ GameObject:
   - component: {fileID: 8745418677435102654}
   - component: {fileID: 7759820615793686976}
   - component: {fileID: 3565050465297639654}
-  - component: {fileID: 3255295125752272713}
   - component: {fileID: 7055252167553610367}
   - component: {fileID: 2063578916384564151}
   - component: {fileID: 2762967523821480613}
@@ -372,7 +371,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
-  <PrefabId>k__BackingField: 7
+  <PrefabId>k__BackingField: 8
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 0
   <SceneId>k__BackingField: 0
@@ -586,109 +585,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 63
---- !u!114 &3255295125752272713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6124020649145926685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneShape: 1
-  drawBones: 1
-  drawTripods: 0
-  boneSize: 1
-  tripodSize: 1
-  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
-  m_Transforms:
-  - {fileID: 1040166157536698780}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!95 &7055252167553610367
 Animator:
   serializedVersion: 5
@@ -700,17 +596,16 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1d38f48126a8ca549a5805bccfdc01ba, type: 3}
   m_Controller: {fileID: 9100000, guid: c9b75da194d9dc24c8cff8526f146609, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
     are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'upperarm_l'\n\tTransform 'upperarm_r'\n\tTransform
-    'thigh_l'\n\tTransform 'neck_01'\n\tTransform 'Root'\n\tTransform 'clavicle_r'\n\tTransform
-    'pelvis'\n\tTransform 'spine_01'\n\tTransform 'clavicle_l'\n\tTransform 'thigh_r'\n\tand
-    more ...\n\tFrom animation clip 'R'"
+    by Humanoid clips.\n\tTransform 'Root'\n\tTransform 'calf_l'\n\tTransform 'thigh_l'\n\tTransform
+    'Root'\n\tTransform 'calf_r'\n\tTransform 'foot_r'\n\tTransform 'foot_l'\n\tTransform
+    'thigh_r'\n\tFrom animation clip 'R'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -883,7 +778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 13
-  _addedNetworkObject: {fileID: 0}
+  _addedNetworkObject: {fileID: 1398490485754560506}
   _networkObjectCache: {fileID: 1398490485754560506}
   randDistance: 10
   ownerManager: {fileID: 5574768742048576020}
@@ -1392,6 +1287,10 @@ PrefabInstance:
       propertyPath: _componentIndexCache
       value: 26
       objectReference: {fileID: 0}
+    - target: {fileID: 2380131764285735984, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
+      propertyPath: m_Name
+      value: pelvis
+      objectReference: {fileID: 0}
     - target: {fileID: 2426756723997577245, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
       propertyPath: m_Weight
       value: 0
@@ -1467,6 +1366,10 @@ PrefabInstance:
     - target: {fileID: 2882887697908882662, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
       propertyPath: m_Weight
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941261529858272145, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
+      propertyPath: m_Name
+      value: spine_01
       objectReference: {fileID: 0}
     - target: {fileID: 3127383949518953006, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
       propertyPath: m_LocalPosition.x

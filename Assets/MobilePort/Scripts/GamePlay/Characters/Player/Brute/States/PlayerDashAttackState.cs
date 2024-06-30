@@ -7,14 +7,8 @@ namespace CharacterBehaviour
 
     public class PlayerDashAttackState : PlayerAttackState
     {
-        
-        int currentId;
-
-        bool isDash;
 
 
-        [SerializeField] float maxJumpForce = 15f;
-        [SerializeField] float maxDashForce = 15f;
 
         [ServerRpc]
         void AttackIdServer(int id)

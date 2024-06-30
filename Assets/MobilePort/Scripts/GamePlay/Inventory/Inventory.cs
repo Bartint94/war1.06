@@ -21,9 +21,11 @@ public class Inventory : NetworkBehaviour
     public Weapon currentWeapon;
     public BlockDetector blockDetector;
     public CharacterAnimationRiging rigging;
+    public Transform aim => distanceAttack.aim;
 
     Animator animator;
     PlayerDistanceAttackState distanceAttack;
+
    // public PlayerAttackState attackState;
 
 
@@ -47,17 +49,31 @@ public class Inventory : NetworkBehaviour
         if(distanceAttack == null) { return; }
         distanceAttack.aim = aim;   
     }
-    public void RemoveWeapons()
+    [ServerRpc]
+    public void RemoveWeaponsNob()
     {
         foreach (var item in itemHolders)
         {
             if(item.isEquiped)
+            {
+                base.Despawn(item.item.NetworkObject);
+                item.isEquiped = false;
+            }
+        }
+    }
+
+    void RemoveWeapons()
+    {
+        foreach (var item in itemHolders)
+        {
+            if (item.isEquiped)
             {
                 Destroy(item.item.gameObject);
                 item.isEquiped = false;
             }
         }
     }
+
 
     public void InitItem(int itemId, ItemCategory category, bool isNob = true)
     {
@@ -84,15 +100,15 @@ public class Inventory : NetworkBehaviour
     }
     void InitWeapon(int weaponId, bool isNob)
     {
-        RemoveWeapons();
         
         if (isNob)
         {
-            
+            RemoveWeapons();
             PoolzSystem.instance.SpawnNobServer(playerData.weapons[weaponId].gameObject, Vector3.zero, Quaternion.identity, null, this);
         }
         else
         {
+            RemoveWeapons();
             var weapon = Instantiate(playerData.weapons[weaponId]);
             Destroy(weapon.GetComponent<NetworkObject>());
             weapon.gameObject.SetActive(true);

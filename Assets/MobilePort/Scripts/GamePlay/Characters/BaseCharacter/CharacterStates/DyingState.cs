@@ -23,11 +23,13 @@ namespace CharacterBehaviour
             ragdolColliders = GetComponentsInChildren<Collider>();
             RagdolOfflineToggle(false);
         }
-        private void Start()
+        public override void OnStartClient()
         {
+            base.OnStartClient();
             RagdollServerToggle(false);
             _sceneController = FindObjectOfType<SceneController>();
         }
+        
         public override void InitState()
         {
             RagdollServerToggle(true);

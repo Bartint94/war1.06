@@ -79,7 +79,7 @@ public class Blood : MonoBehaviour, ISpawnable
     }
  
 
-    public void Init(Vector3 position, Quaternion rotation, Transform owner, Inventory inventory = null)
+    public void Init(Vector3 position, Quaternion rotation, GameObject owner, Inventory inventory = null)
     {
         lifeTime = 0f;
 

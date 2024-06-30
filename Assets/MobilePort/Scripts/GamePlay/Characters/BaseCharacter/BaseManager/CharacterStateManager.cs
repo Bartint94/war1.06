@@ -59,22 +59,10 @@ namespace CharacterBehaviour
         {
             currentState.UpdateOwnerState();
         }
-        public bool CheckHitValidation(Weapon weapon)
+        public bool CheckHitValidation(IOffensive weapon)
         {
 
-            if (weapon.manager == this)
-            {
-                return false;
-            }
-            if (weapon.currentOpponent == this)
-            {
-                return false;
-            }
-            if (weapon.currentWeaponState == WeaponState.deffence)
-            {
-                return false;
-            }
-            return true;
+            return weapon.CheckTarget(this);
         }
     }
 

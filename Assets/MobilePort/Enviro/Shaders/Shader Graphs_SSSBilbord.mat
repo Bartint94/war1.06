@@ -54,6 +54,7 @@ Material:
     - _CastShadows: 1
     - _Cull: 0
     - _DstBlend: 0
+    - _MINIMUM: -0.12
     - _NormalFluence: -1.33
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -62,13 +63,14 @@ Material:
     - _SSSPower: 0.03
     - _Smoothness: 1.05
     - _SrcBlend: 1
-    - _Strenght: 3.09
-    - _Stretch: 2.19
+    - _Strenght: 190.77
+    - _Stretch: 0.56
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
+    - _mAXIMUM: -0.54
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.9901584, g: 1, b: 0.9386792, a: 0}

@@ -4,18 +4,21 @@ using FishNet.Example.Prediction.Rigidbodies;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 public enum LerpType { constant, soft}
 public enum ZoomType { standard, melee, aiming}
 public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform cam;
-    [SerializeField] Transform currentFollowObject;
+    [SerializeField] Transform standardFollowObject;
+    Transform currentFollowObject;
 
 
     public Transform aim;
+    Transform standardParent;
 
-    public List<CamOffset> camOffsets = new List<CamOffset>(2);
+    public List<CamOffset> offsets = new List<CamOffset>(2);
 
     [SerializeField] float speedMultipiler;
     Vector3 refVelocity;
@@ -27,11 +30,21 @@ public class CameraController : MonoBehaviour
     [SerializeField] float rotationSpeed;
     private void Start()
     {
-        camOffsets[0].rotation = cam.localRotation;
-        camOffsets[0].position = cam.localPosition;
-
+        standardParent = cam.parent;
         cameraShake = GetComponent<CameraShake>();
-       
+        currentFollowObject = standardFollowObject;
+    }
+    void StandardView()
+    {
+        //cam.SetParent(standardParent, true);
+        //cam.localRotation = offsets[0].rotation;
+        //cam.localPosition = offsets[0].position;
+
+    }
+    void AimView()
+    {
+        
+        //cam.localRotation = Quaternion.identity;
     }
     public void Shake(float duration)
     {
@@ -39,19 +52,30 @@ public class CameraController : MonoBehaviour
     }
     public void ToggleView(ZoomType zoom ,LerpType lerp)
     {
-        //LerpRot(cam,camOffsets[(int)zoom].rotation);
+        //LerpRot(cam,offsets[(int)zoom].rotation);
+        StopAllCoroutines();
        if(zoom == ZoomType.aiming)
         {
-       //     LerpRot(cam, aim.rotation, lerp);
+            //     LerpRot(cam, aim.rotation, lerp);
+            cam.SetParent(null, true);
+            StartCoroutine(CamAim(cam, aim, offsets[(int)zoom].position, softLerp));
+            
+            /* LerpPos(cam, offsets[(int)zoom].position, LerpType.constant);
+            cam.localPosition = offsets[(int)zoom].position;
+            cam.localRotation = offsets[(int)zoom].rotation;
+            */
+           
         }
         else
         {
-          //  LerpRot(cam, camOffsets[(int)zoom].rotation, lerp);
+            StandardView();
+            cam.SetParent(null, true);
+            StartCoroutine(CamAim(cam, standardParent, offsets[(int)zoom].position, softLerp));
+            //  LerpRot(cam, offsets[(int)zoom].rotation, lerp);
         }
-        StopAllCoroutines();
-        LerpPos(cam, camOffsets[(int)zoom].position, lerp);
-        cam.transform.DOLocalRotateQuaternion(camOffsets[(int)zoom].rotation, rotationSpeed);
-        
+       // StopAllCoroutines();
+        //LerpPos(cam, offsets[(int)zoom].position, lerp);
+        //cam.transform.DOLocalRotateQuaternion(offsets[(int)zoom].rotation, rotationSpeed);
 
     }
 
@@ -59,61 +83,42 @@ public class CameraController : MonoBehaviour
     {
         if (currentFollowObject == null) { return; }
 
+        
 
-      //  float speed = Vector3.Distance(transform.position, currentFollowObject.position) * speedMultipiler;
-        //transform.position = Vector3.MoveTowards(transform.position, currentFollowObject.position + Vector3.up, speed * Time.deltaTime);
+      //  float speed = Vector3.Distance(transform.position, standardFollowObject.position) * speedMultipiler;
+        //transform.position = Vector3.MoveTowards(transform.position, standardFollowObject.position + Vector3.up, speed * Time.deltaTime);
         transform.position = currentFollowObject.transform.position;
 
     }
-    void LerpRot(Transform current, Quaternion target)
+   
+    IEnumerator CamAim(Transform a, Transform b, Vector3 offset, float time)
     {
-        current.DORotateQuaternion(target, .3f);
-    }
-    private void LerpPos(Transform current, Vector3 target, LerpType lerp)
-    {
-        if (lerp == LerpType.constant)
-        {
-            StartCoroutine(LerpPosConstant(current,target));
-        }
-        if(lerp == LerpType.soft)
-        {
-            StartCoroutine(LerpPosSoft(current,target));
-        }
-    }
-    IEnumerator LerpPosSoft(Transform current, Vector3 target)
-    {
-       // float currentLerpTime = 0f;
-       // Vector3 startPos = current.localPosition;
-        while (Vector3.Distance(current.position, target) > 0.02f)
-        {
-          //  currentLerpTime += Time.deltaTime;
-
-          
-            current.localPosition = Vector3.Lerp(current.localPosition, target, Time.deltaTime * softLerp);
-            yield return new WaitForEndOfFrame();
-        }
-        yield return null;
-    }
-    IEnumerator LerpPosConstant(Transform current, Vector3 target)
-    {
+        Vector3 finalTarget = Vector3.zero;
+        Vector3 startPos = a.position;
         float currentLerpTime = 0f;
-        Vector3 startPos = current.localPosition;
-        while(Vector3.Distance(current.position, target) > 0.02f) 
+        while (Vector3.Distance(a.position, finalTarget) > 0.1f)
         {
+            a.rotation = Quaternion.LookRotation(b.forward);
+
+            finalTarget = b.position + b.right * offset.x + b.up * offset.y + b.forward * offset.z;
+
             currentLerpTime += Time.deltaTime;
 
-            if(currentLerpTime > .3f)
+            if (currentLerpTime > time)
             {
-                currentLerpTime = .3f;
+                currentLerpTime = time;
             }
 
-            float t = currentLerpTime / .3f;
-            
-            current.localPosition = Vector3.Lerp(startPos, target, t);
-            yield return new WaitForEndOfFrame();
+            float t = currentLerpTime / time;
+
+            a.position = Vector3.Lerp(startPos, finalTarget, t);
+            yield return null;
+
         }
+        a.SetParent(b, true);
         yield return null;
     }
+
 }
 [System.Serializable]
 public class CamOffset

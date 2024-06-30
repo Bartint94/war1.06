@@ -24,10 +24,6 @@ namespace CharacterBehaviour
             enemyTarget = enemyManager.enemyTarget; 
             targetTransform = enemyTarget.transform; 
         }
-        public override async void InitState()
-        {
-           // await enemyTarget.LookForCloserTarget();
-        }
       
         void Die()
         {
@@ -93,6 +89,11 @@ namespace CharacterBehaviour
         public override void BeforeSwitchState()
         {
      
+        }
+
+        public override void InitState()
+        {
+           
         }
     }
 }

@@ -11,21 +11,25 @@ namespace CharacterBehaviour
     public class PlayerDistanceAttackState : CharacterState
     {
         public Transform aim;
-        [SerializeField] Weapon arrow;
         [SerializeField] Transform cam;
         [SerializeField] float maxSpeed;
-       
+        public GameObject currentProjectile;
+        public Arrows arrow;
         public override void InitState()
         {
             if (!IsOwner) { return; }
             if (playerInputs.isMobile) { playerInputs.isAttackStarted = false; }
             //rigs.SetRigWightLocal(1f, RigPart.distanceAim, 0f);
             rigs.SetRigWeightServer(1f, RigPart.distanceAim, 0f);
-            cameraController.ToggleView(ZoomType.aiming,LerpType.constant);
             //characterAnimations.AnimatorAttackSpeedServer(1f);
             characterAnimations.AttackIdServer(1);
             MaxSpeed = maxSpeed;
-            
+            ShotStart(gameObject);
+            Invoke(nameof(Zoom), 0.2f);  
+        }
+        void Zoom()
+        {
+            cameraController.ToggleView(ZoomType.aiming,LerpType.constant);
         }
         protected void OnEnable()
         {
@@ -72,25 +76,47 @@ namespace CharacterBehaviour
         {
             
         }
-
-        public void ShotEnd()
+        [ServerRpc]
+        void ShotStart(GameObject parent)
         {
-           // poolzSystem.Spawn(arrow.gameObject, aim.position, aim.rotation, playerManager.transform);
-
-            if (!IsOwner) { return; }
-           
-
+            
+            
             Vector3 localPosition = aim.localPosition;
             Quaternion localRotation = aim.localRotation;
-            
-            
-            Vector3 worlsPosition = aim.TransformPoint(localPosition);
+
+
+            Vector3 worldPosition = aim.TransformPoint(localPosition);
             Quaternion worldRotation = Quaternion.LookRotation(aim.forward);
 
+            //var pool = poolzSystem.GetComponent<PoolzSystem>(); 
+
+           // currentProjectile = poolzSystem.SpawnNob(playerData.arrows[playerData.currentArrowId].gameObject, worldPosition, worldRotation, parent, inventory);
+            ArrowRef(worldPosition,worldRotation);
+        }
+        [ObserversRpc] 
+        void ArrowRef(Vector3 pos, Quaternion rot)
+        {
+            currentProjectile = poolzSystem.SpawnNob(playerData.arrows[playerData.currentArrowId].gameObject, pos, rot, aim.gameObject, inventory);
+            
+            arrow = currentProjectile.GetComponent<Arrows>();
+        }
+        public void ShotEnd()
+        {
+            // poolzSystem.Spawn(arrow.gameObject, aim.position, aim.rotation, playerManager.transform);
+
+          //  currentProjectile.GetComponent<Arrows>().Shot();
+               arrow.ShotObserver(aim.position, aim.rotation);
+             
+            if (IsOwner)
+            {
+                //IsProjectile = true;
+            }
+
+        }
+      
+
             
 
-            PoolzSystem.instance.SpawnNobServer(arrow.gameObject, worlsPosition, worldRotation,transform);
-        }
 /*
         [ServerRpc]
         void SpawnNobServer(GameObject prefab, Vector3 position, Quaternion rotation)

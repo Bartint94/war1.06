@@ -1,3 +1,4 @@
+using FishNet.Object;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
-public class PlayerInputs : MonoBehaviour
+public class PlayerInputs : NetworkBehaviour
 {
     public bool isMobile;
     public bool isJumpStarted;
@@ -50,19 +51,18 @@ public class PlayerInputs : MonoBehaviour
 
     private void OnDisable()
     {
-
-      hit.onClick.RemoveAllListeners();
+        if (hit == null) return;
+        hit.onClick.RemoveAllListeners();
         jump.onClick.RemoveAllListeners();
         dash.onClick.RemoveAllListeners();
     }
- 
-    private void Start()
-    {
-#if UNITY_WIN
 
-    //Debug.Log("Standalone Windows");
-    isMobile = false;
-#endif
+    public override void OnStartClient()
+    {
+       
+    
+    
+        if(IsOwner)      
         hud = Hud.instance;
         if (hud != null)
             hud.Init(this);
@@ -76,10 +76,10 @@ public class PlayerInputs : MonoBehaviour
             hit.onClick.AddListener(Hit);
             jump.onClick.AddListener(Jump);
             dash.onClick.AddListener(Dashr);
-            Cursor.lockState = CursorLockMode.Confined;
-            
+           
         }
     }
+    
     public void UpdateInputs()
     {
         if (!isMobile)

@@ -22,13 +22,13 @@ namespace CharacterBehaviour
 
 
         public int attacksCount = 6;
-        int currentId;
+        protected int currentId;
 
-        bool isDash;
+        protected bool isDash;
         bool isStoped;
 
-        [SerializeField] float maxJumpForce = 15f;
-        [SerializeField] float maxDashForce = 15f;
+        [SerializeField] protected float maxJumpForce = 15f;
+        [SerializeField] protected float maxDashForce = 15f;
         float duration = 1.55f;
 
         
@@ -88,7 +88,7 @@ namespace CharacterBehaviour
         {
             if (!IsOwner) return;
 
-            Debug.Log(characterAnimations.RootMotionUpdate() + " dash");
+          
             DashForce = characterAnimations.RootMotionUpdate() * dashSpeed;
 
             elapsed += Time.deltaTime;

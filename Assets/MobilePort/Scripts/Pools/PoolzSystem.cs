@@ -6,12 +6,14 @@ using UnityEngine.Pool;
 using UnityEngine.UIElements;
 public interface ISpawnable
 {
-    void Init(Vector3 position, Quaternion rotation, Transform owner,Inventory inventory = null);
+    
+    void Init(Vector3 position, Quaternion rotation, GameObject owner,Inventory inventory = null);
 }
 public class PoolzSystem : NetworkBehaviour
 {
     public List<Poolz> poolz = new List<Poolz>();
     public static PoolzSystem instance;
+    Inventory inventory;
     private void Awake()
     {
         instance = this;
@@ -19,13 +21,28 @@ public class PoolzSystem : NetworkBehaviour
         {
             Init(spawner);
         }
+        inventory = GetComponent<Inventory>();
     }
     private void Start()
     {
     }
+    public GameObject SpawnNob(GameObject prefab, Vector3 position, Quaternion rotation, GameObject parent, Inventory inventory = null)
+    {
+        var ar = Instantiate(prefab, position, rotation); //NetworkManager.GetPooledInstantiated(prefab, true)
+        //base.Spawn(ar);
+
+       // ActivateNobObserver(ar, position, rotation, parent, inventory);
+        ar.GetComponent<ISpawnable>().Init(position, rotation, parent, inventory);
+        //ar.GetComponent<ISpawnable>().Init(aim.position, aim.rotation, transform);
+        //GameObject ar = Instantiate(arrow.gameObject, aim.position, aim.rotation);
+        //base.Spawn(ar, base.Owner);
+        //SpawnProjectile();
+        
+        return ar;
+    }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnNobServer(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent,Inventory inventory = null)
+    public void SpawnNobServer(GameObject prefab, Vector3 position, Quaternion rotation, GameObject parent,Inventory inventory = null)
     {
         var ar = Instantiate(prefab, position, rotation); //NetworkManager.GetPooledInstantiated(prefab, true)
         base.Spawn(ar);
@@ -35,11 +52,14 @@ public class PoolzSystem : NetworkBehaviour
         //GameObject ar = Instantiate(arrow.gameObject, aim.position, aim.rotation);
         //base.Spawn(ar, base.Owner);
         //SpawnProjectile();
-         ActivateNobObserver(ar, position, rotation, parent, inventory);
+        ActivateNobObserver(ar, position, rotation, parent, inventory);
     }
+
     [ObserversRpc(BufferLast = true)]
-    void ActivateNobObserver(GameObject ob, Vector3 position, Quaternion rotation, Transform parent, Inventory inventory)
+    void ActivateNobObserver(GameObject ob, Vector3 position, Quaternion rotation, GameObject parent, Inventory inventory)
     {
+        if(ob == null) { return; }
+       // var ar = Instantiate(ob, position, rotation);
         ob.SetActive(true);
         ob.GetComponent<ISpawnable>().Init(position, rotation, parent, inventory);
 
@@ -67,18 +87,19 @@ public class PoolzSystem : NetworkBehaviour
          }, false, 5, 5);
     }
     GameObject spawn;
-    public void Spawn(GameObject prefab, Vector3 position, Quaternion rotation, Transform owner = null)
+    public GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation, GameObject owner = null)
     {
         var pool = poolz.Find(p => p.prefab.name == prefab.name);
 
         if (pool != null)
         {
-            pool.Spawn(position, rotation, owner);
-            
+            var p = pool.Spawn(position, rotation, owner);
+            return p;
         }
         else
         {
             Debug.Log("pools dont have this object");
+            return null;
         }
     }
     void Show()
@@ -127,15 +148,15 @@ public class Poolz
 
     public static Spawner instance;
 
-    public void Spawn(Vector3 position, Quaternion rotation, Transform owner)
+    public GameObject Spawn(Vector3 position, Quaternion rotation, GameObject owner)
     {
         for (int i = 0; i < spawnAmount; i++)
         {
             var spawn = _pool.Get();// position + Vector3.up *2 + Random.insideUnitSphere * 7;
             spawn.GetComponent<ISpawnable>().Init(position, rotation, owner);
-            //return spawn;
+            return spawn;
         }
-       // return null;
+        return null;
     }
     public void Release(GameObject blood)
     {

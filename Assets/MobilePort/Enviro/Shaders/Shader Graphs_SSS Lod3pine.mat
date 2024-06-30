@@ -77,6 +77,7 @@ Material:
     - _Cull: 0
     - _DstBlend: 0
     - _Float: 0
+    - _MINIMUM: 50.88
     - _NormalFluence: 1
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -85,16 +86,17 @@ Material:
     - _SSSPower: 0.6
     - _Smoothness: 12.16
     - _SrcBlend: 1
-    - _Strenght: 3.61
-    - _Stretch: 5.73
+    - _Strenght: 99.33
+    - _Stretch: 107.7
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
+    - _mAXIMUM: -3.31
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
-    - _Color: {r: 0.35024816, g: 0.38679248, b: 0.27549842, a: 1}
+    - _Color: {r: 0.6649272, g: 0.7830189, b: 0.44691172, a: 1}
     - _Vector3: {r: 0, g: 8.54, b: 0, a: 0}
     - _Vector3_1: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

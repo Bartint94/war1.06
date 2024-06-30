@@ -48,18 +48,13 @@ _rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
 */
         public void Dash()
         {
-            if (IsOwner)
-            {
-                isDash = true;
+           
 
-            }
-
-            if (IsServer)
-            {
+          
                 inventory.WeaponTriggerToggle(true, WeaponState.attack);
                 // rigs.SetRigWeightObserver(1f, RigPart.aim,.3f);
 
-            }
+            
             /*   
                if(characterAnimations.isSwitch)
                {
@@ -74,8 +69,7 @@ _rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
 
         public void HitEnd()
         {
-            //if (IsOwner)
-            {
+      
                 isDash = false;
                 //  cameraController.ToggleView(ZoomType.standard, LerpType.soft);
 
@@ -84,13 +78,9 @@ _rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
 
                 inventory.WeaponTriggerToggle(false, WeaponState.deffence);
 
-            }
+            
 
-            if (IsServer)
-            {
-                //   inventory.WeaponTriggerToggle(false,WeaponState.deffence);
-
-            }
+         
 
         }
         public override void InitState()
@@ -120,21 +110,6 @@ _rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
 
         public override void UpdateOwnerState()
         {
-            /* Vector3 forces = (transform.forward * move);
-             _rigidbody.AddForce(0, -9.80665f, 0);
-             if (_rigidbody.velocity.magnitude < maxMoveVelocity)
-             {
-                 _rigidbody.AddForce(forces * _moveRate);
-
-             }
-            */
-            /*    if (isDash)
-                {
-                    _rigidbody.AddForce(dashDir * 10f, ForceMode.Impulse);
-                    isDash = false;
-                }
-            */
-
 
             DashForce = characterAnimations.RootMotionUpdate() * dashSpeed;
             _rigidbody.velocity = (transform.forward * DashForce) + Vector3.up * -9.8f;

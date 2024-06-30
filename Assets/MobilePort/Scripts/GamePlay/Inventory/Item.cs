@@ -14,7 +14,7 @@ public class Item : NetworkBehaviour, ISpawnable
       
     }
 
-    public void Init(Vector3 tranform, Quaternion rotation, Transform owner, Inventory inventory)
+    public void Init(Vector3 tranform, Quaternion rotation, GameObject owner, Inventory inventory)
     {
         Init(inventory);
     }

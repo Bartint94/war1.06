@@ -53,7 +53,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 1510917808567396934}
   _networkObjectCache: {fileID: 1510917808567396934}
-  force: 20
+  force: 60
 --- !u!54 &3933625071553579675
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -78,9 +78,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!65 &3482718256658200551
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _defaultDespawnType: 1
   NetworkObserver: {fileID: 0}
-  <PrefabId>k__BackingField: 9
+  <PrefabId>k__BackingField: 11
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 0
   <SceneId>k__BackingField: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 1510917808567396934}
   _implementsPredictionMethods: 0
   _graphicalObject: {fileID: 3598984002207370157}
-  _enableTeleport: 1
+  _enableTeleport: 0
   _teleportThreshold: 1
   _ownerSmoothPosition: 1
   _ownerSmoothRotation: 1
@@ -196,7 +196,7 @@ MonoBehaviour:
   _spectatorSmoothingType: 0
   _customSmoothingData:
     InterpolationPercent: 1
-    CollisionInterpolationPercent: 0.1
+    CollisionInterpolationPercent: 0.2
     InterpolationDecreaseStep: 1
     InterpolationIncreaseStep: 3
   _preconfiguredSmoothingDataPreview:

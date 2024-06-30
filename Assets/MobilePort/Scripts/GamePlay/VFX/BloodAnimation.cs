@@ -107,7 +107,7 @@ public class BloodAnimation : MonoBehaviour, ISpawnable
          
         
     }
-    public void Init(Vector3 position, Quaternion rotation, Transform owner, Inventory inventory = null)
+    public void Init(Vector3 position, Quaternion rotation, GameObject owner, Inventory inventory = null)
     {
         transform.position = position;
         if(isRotated)
@@ -116,9 +116,9 @@ public class BloodAnimation : MonoBehaviour, ISpawnable
         {
           
         }
-        this.owner = owner;
+        this.owner = owner.transform;
 
-        ownerOffset = position - owner.position ; 
+        ownerOffset = position - owner.transform.position ; 
 
         Play();
     }

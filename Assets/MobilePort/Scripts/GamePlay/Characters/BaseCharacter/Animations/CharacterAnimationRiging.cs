@@ -241,11 +241,18 @@ namespace CharacterBehaviour
 
         IEnumerator FollowPosition(Transform target, Transform rig, float time)
         {
-            while (time > 0)
+            if(target == null)
             {
-                hitSource.position = target.position;
-                yield return new WaitForEndOfFrame();
-                time -= Time.deltaTime;
+                yield return null;
+            }
+            else
+            {
+                while (time > 0)
+                {
+                    hitSource.position = target.position;
+                    yield return new WaitForEndOfFrame();
+                    time -= Time.deltaTime;
+                }
             }
         }
 
