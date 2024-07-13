@@ -129,8 +129,18 @@ public class Weapon : Item, IOffensive
         {
             return false;
         }
-        else
+      
+        if (currentOpponent == this.manager)
+        {
+            return false;
+        }
+        if (currentWeaponState == WeaponState.deffence)
+        {
+            return false;
+        }
+        
         return true;
+        
     }
 }
 

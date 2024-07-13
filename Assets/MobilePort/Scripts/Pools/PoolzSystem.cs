@@ -87,13 +87,13 @@ public class PoolzSystem : NetworkBehaviour
          }, false, 5, 5);
     }
     GameObject spawn;
-    public GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation, GameObject owner = null)
+    public GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation, GameObject owner , Inventory inv)
     {
         var pool = poolz.Find(p => p.prefab.name == prefab.name);
 
         if (pool != null)
         {
-            var p = pool.Spawn(position, rotation, owner);
+            var p = pool.Spawn(position, rotation, owner, inv);
             return p;
         }
         else
@@ -148,12 +148,12 @@ public class Poolz
 
     public static Spawner instance;
 
-    public GameObject Spawn(Vector3 position, Quaternion rotation, GameObject owner)
+    public GameObject Spawn(Vector3 position, Quaternion rotation, GameObject owner, Inventory inv)
     {
         for (int i = 0; i < spawnAmount; i++)
         {
             var spawn = _pool.Get();// position + Vector3.up *2 + Random.insideUnitSphere * 7;
-            spawn.GetComponent<ISpawnable>().Init(position, rotation, owner);
+            spawn.GetComponent<ISpawnable>().Init(position, rotation, owner, inv);
             return spawn;
         }
         return null;

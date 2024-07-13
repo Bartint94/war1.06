@@ -47,14 +47,14 @@ public class CharacterLoad : NetworkBehaviour
     {
 
         LoadCustomizeObserver(name, baseId, headId, torsoId, legsId, feetId, weaponId);
-       // inventory.InitItem(weaponId,ItemCategory.Weapon);
+        //inventory.InitItem(weaponId,ItemCategory.Weapon);
     }
     [ObserversRpc(BufferLast = true)]
     void LoadCustomizeObserver(string name, int baseId ,int headId, int torsoId, int legsId, int feetId, int weaponId)
     {
         baseSkin.materials[0].SetTexture("_BaseMap", playerData.baseSkin[baseId]);
 
-        inventory.InitItem(weaponId, ItemCategory.Weapon);
+        inventory.InitItem(weaponId, ItemCategory.Weapon,false);
         inventory.InitItem(headId, ItemCategory.Head, false);
         inventory.InitItem(torsoId, ItemCategory.Torso, false);
         inventory.InitItem(legsId, ItemCategory.Legs, false);

@@ -17,6 +17,17 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     Inventory inventory;
     CharacterStateManager manager => inventory.characterStateManager;
 
+
+    [SerializeField] AnimationCurve flyCurve;
+    [SerializeField] AnimationCurve gravCurve;
+
+    Vector3 lastPos;
+    Vector3 forwardDir;
+    float duration;
+    Vector3 speed;
+    public float mag;
+    [SerializeField] float lerp;
+    [SerializeField] Transform visibleObj;
     private void Awake()
     {
     }
@@ -50,16 +61,50 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     {
         transform.SetParent(null , true);
         //_rigidbody.isKinematic = false;
-       // transform.position = pos;
+        // transform.position = pos;
         //transform.rotation = rot;
         //_rigidbody.AddForce(transform.forward * force, ForceMode.Impulse);
+      
+
+        duration = 0;
+     
         isFly = true;
     }
+    float test;
     private void FixedUpdate()
     {
         if(isFly)
-        transform.Translate(transform.forward *  force * Time.deltaTime, Space.World);
+
+        {
+            
+            duration += Time.deltaTime;
+            test = Mathf.Lerp(test, 1f, lerp *Time.deltaTime);
+            var curve = flyCurve.Evaluate(test);
+            var curveGrav = gravCurve.Evaluate(test);
+           
+            transform.Translate((transform.forward *  curve )+ (-Vector3.up * curveGrav), Space.World);
+
+            //transform.position = Vector3.Lerp(forwardDir, gravityDir, speed);
+        }
+        //transform.position = Vector3.Lerp()
         
+    }
+    private void LateUpdate()
+    {
+            VisibleObjCalculate();
+    }
+    void VisibleObjCalculate()
+    {
+        if (lastPos != transform.position)
+        {
+            speed = transform.position - lastPos;
+            forwardDir = speed;
+            speed /= Time.deltaTime;
+            
+            mag = speed.magnitude;
+            lastPos = transform.position;
+        }
+        visibleObj.transform.rotation = Quaternion.LookRotation(forwardDir);
     }
 
     private void OnTriggerEnter(Collider other)

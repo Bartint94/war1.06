@@ -99,7 +99,7 @@ public class HitBox : NetworkBehaviour
     [ObserversRpc]
     void HitVfxObservers(Weapon weapon, Vector3 source, Quaternion rot, Vector3 dir ,float dmg, GameObject go)
     {
-        PoolzSystem.instance.Spawn(poolzSystem.poolz[0].prefab, source, rot, go);
+        PoolzSystem.instance.Spawn(poolzSystem.poolz[0].prefab, source, rot, go,null);
         // poolzSystem.Spawn(poolzSystem.poolz[1].prefab, source, rot, transform);
         //  poolzSystem.Spawn(poolzSystem.poolz[3].prefab, source, rot, transform);
         //poolzSystem.Spawn(poolzSystem.poolz[4].prefab, source, rot, transform);

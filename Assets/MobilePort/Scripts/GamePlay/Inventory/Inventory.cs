@@ -109,10 +109,10 @@ public class Inventory : NetworkBehaviour
         else
         {
             RemoveWeapons();
-            var weapon = Instantiate(playerData.weapons[weaponId]);
+            var weapon = PoolzSystem.instance.SpawnNob(playerData.weapons[weaponId].gameObject, Vector3.zero, Quaternion.identity,null,this);
             Destroy(weapon.GetComponent<NetworkObject>());
             weapon.gameObject.SetActive(true);
-            weapon.Init(this);
+            //weapon.Init(this);
         }
     }
     void InitTorso(int itemId)

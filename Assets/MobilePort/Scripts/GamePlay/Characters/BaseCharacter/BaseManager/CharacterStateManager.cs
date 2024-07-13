@@ -63,6 +63,8 @@ namespace CharacterBehaviour
         {
 
             return weapon.CheckTarget(this);
+           
+          
         }
     }
 
