@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     public Transform aim;
     Transform standardParent;
 
-    public List<CamOffset> offsets = new List<CamOffset>(2);
+    public List<MiscOffset> offsets = new List<MiscOffset>(2);
 
     [SerializeField] float speedMultipiler;
     Vector3 refVelocity;
@@ -116,12 +116,13 @@ public class CameraController : MonoBehaviour
 
         }
         a.SetParent(b, true);
+        a.localRotation = Quaternion.identity;
         yield return null;
     }
 
 }
 [System.Serializable]
-public class CamOffset
+public class MiscOffset
 {
     public Vector3 position;
     public Quaternion rotation;

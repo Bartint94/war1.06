@@ -15,6 +15,7 @@ namespace CharacterBehaviour
         [SerializeField] float maxSpeed;
         public GameObject currentProjectile;
         public Arrows arrow;
+        [SerializeField] float zoomInvoke;
         public override void InitState()
         {
             if (!IsOwner) { return; }
@@ -25,7 +26,7 @@ namespace CharacterBehaviour
             characterAnimations.AttackIdServer(1);
             MaxSpeed = maxSpeed;
             ShotStart(gameObject);
-            Invoke(nameof(Zoom), 0.2f);  
+            Invoke(nameof(Zoom), zoomInvoke);  
         }
         void Zoom()
         {

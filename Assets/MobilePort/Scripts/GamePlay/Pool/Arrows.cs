@@ -13,7 +13,7 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     Collider _collider;
     [SerializeField] float force = 20f;
     GameObject _owner;
-    bool isFly;
+    public bool isFly;
     Inventory inventory;
     CharacterStateManager manager => inventory.characterStateManager;
 
@@ -28,6 +28,8 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     public float mag;
     [SerializeField] float lerp;
     [SerializeField] Transform visibleObj;
+    [SerializeField] MiscOffset offset;
+    
     private void Awake()
     {
     }
@@ -43,10 +45,17 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
             // _weapon = GetComponent<Weapon>();
             // _weapon.manager = owner.GetComponent<CharacterStateManager>(); 
             this.inventory = inventory;
-            transform.SetParent(inventory.aim, false);
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
+            transform.SetParent(inventory.itemHolders[1].transform, false);
+            transform.localPosition = offset.position;
+            transform.localRotation = offset.rotation;
         }
+    }
+
+    void SetAim()
+    {
+        transform.SetParent(inventory.aim, false);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
  //   [ServerRpc(RequireOwnership = false)]
     public void Shot(Vector3 pos, Quaternion rot)
@@ -59,6 +68,7 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     
     public void ShotObserver(Vector3 pos, Quaternion rot)
     {
+        SetAim();
         transform.SetParent(null , true);
         //_rigidbody.isKinematic = false;
         // transform.position = pos;
@@ -83,16 +93,13 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
             var curveGrav = gravCurve.Evaluate(test);
            
             transform.Translate((transform.forward *  curve )+ (-Vector3.up * curveGrav), Space.World);
-
+            VisibleObjCalculate();
             //transform.position = Vector3.Lerp(forwardDir, gravityDir, speed);
         }
         //transform.position = Vector3.Lerp()
         
     }
-    private void LateUpdate()
-    {
-            VisibleObjCalculate();
-    }
+   
     void VisibleObjCalculate()
     {
         if (lastPos != transform.position)

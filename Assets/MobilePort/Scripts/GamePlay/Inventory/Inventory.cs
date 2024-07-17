@@ -25,7 +25,7 @@ public class Inventory : NetworkBehaviour
 
     Animator animator;
     PlayerDistanceAttackState distanceAttack;
-
+    CameraController cameraController;
    // public PlayerAttackState attackState;
 
 
@@ -38,6 +38,7 @@ public class Inventory : NetworkBehaviour
         animator = GetComponent<Animator>();
         blockDetector = GetComponentInChildren<BlockDetector>();
         rigging = GetComponent<CharacterAnimationRiging>();
+        cameraController = GetComponentInChildren<CameraController>();
         
     }
     public void ChangeAnimator(RuntimeAnimatorController controller)
@@ -47,6 +48,7 @@ public class Inventory : NetworkBehaviour
     public void SetAim(Transform aim)
     {
         if(distanceAttack == null) { return; }
+        cameraController.aim = aim;
         distanceAttack.aim = aim;   
     }
     [ServerRpc]
