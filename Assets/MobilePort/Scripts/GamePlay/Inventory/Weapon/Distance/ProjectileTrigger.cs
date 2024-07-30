@@ -6,10 +6,12 @@ using UnityEngine;
 public class ProjectileTrigger : MonoBehaviour, IOffensive
 {
     Arrows arrow;
+    Collider _collider;
 
     private void Awake()
     {
         arrow = GetComponentInParent<Arrows>();
+        _collider = GetComponent<Collider>();
     }
     public bool CheckTarget(CharacterStateManager manager)
     {
@@ -22,7 +24,11 @@ public class ProjectileTrigger : MonoBehaviour, IOffensive
         if (other.TryGetComponent(out HitBox hitBox))
         {
             if (arrow.CheckTarget(hitBox.manager))
+            {
                 arrow.isFly = false;
+                _collider.enabled = false;
+            }
+
             // _rigidbody.isKinematic = true;
             // transform.parent  = other.transform;
             //transform.localRotation = Quaternion.Euler(0, 0, 0);

@@ -58,7 +58,8 @@ public class CameraController : MonoBehaviour
         {
             //     LerpRot(cam, aim.rotation, lerp);
             cam.SetParent(null, true);
-            StartCoroutine(CamAim(cam, aim, offsets[(int)zoom].position, softLerp));
+            StartCoroutine(CamAimPos(cam, aim, offsets[(int)zoom].position, softLerp));
+            StartCoroutine(CamAimRot(cam, aim, rotationSpeed));
             
             /* LerpPos(cam, offsets[(int)zoom].position, LerpType.constant);
             cam.localPosition = offsets[(int)zoom].position;
@@ -70,7 +71,8 @@ public class CameraController : MonoBehaviour
         {
             StandardView();
             cam.SetParent(null, true);
-            StartCoroutine(CamAim(cam, standardParent, offsets[(int)zoom].position, softLerp));
+            StartCoroutine(CamAimPos(cam, standardParent, Vector3.zero, softLerp));
+            StartCoroutine(CamAimRot(cam, standardParent, rotationSpeed));
             //  LerpRot(cam, offsets[(int)zoom].rotation, lerp);
         }
        // StopAllCoroutines();
@@ -91,15 +93,14 @@ public class CameraController : MonoBehaviour
 
     }
    
-    IEnumerator CamAim(Transform a, Transform b, Vector3 offset, float time)
+    IEnumerator CamAimPos(Transform a, Transform b, Vector3 offset, float time)
     {
         Vector3 finalTarget = Vector3.zero;
         Vector3 startPos = a.position;
         float currentLerpTime = 0f;
-        while (Vector3.Distance(a.position, finalTarget) > 0.1f)
+        while (Vector3.Distance(a.position, finalTarget) > 0.01f)
         {
-            a.rotation = Quaternion.LookRotation(b.forward);
-
+            
             finalTarget = b.position + b.right * offset.x + b.up * offset.y + b.forward * offset.z;
 
             currentLerpTime += Time.deltaTime;
@@ -111,12 +112,43 @@ public class CameraController : MonoBehaviour
 
             float t = currentLerpTime / time;
 
+           
             a.position = Vector3.Lerp(startPos, finalTarget, t);
             yield return null;
 
         }
         a.SetParent(b, true);
+       
+        a.localPosition = Vector3.zero + offset;
+        yield return null;
+    }
+    IEnumerator CamAimRot(Transform a, Transform b, float time)
+    {
+        
+        Quaternion startRot = a.rotation;
+        float currentLerpTime = 0f;
+        while (Quaternion.Angle(a.rotation,b.rotation) > .01f)
+        {
+
+           // finalTarget = b.position + b.right * offset.x + b.up * offset.y + b.forward * offset.z;
+
+            currentLerpTime += Time.deltaTime;
+
+            if (currentLerpTime > time)
+            {
+                currentLerpTime = time;
+            }
+
+            float t = currentLerpTime / time;
+
+            a.rotation = Quaternion.Lerp(startRot, b.rotation,t);
+            
+            yield return null;
+
+        }
+      
         a.localRotation = Quaternion.identity;
+       
         yield return null;
     }
 

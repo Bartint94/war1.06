@@ -15,7 +15,8 @@ namespace CharacterBehaviour
         [SerializeField] float maxSpeed;
         public GameObject currentProjectile;
         public Arrows arrow;
-        [SerializeField] float zoomInvoke;
+        [SerializeField] float zoomInInvoke;
+        [SerializeField] float zoomOutInvoke;
         public override void InitState()
         {
             if (!IsOwner) { return; }
@@ -26,11 +27,7 @@ namespace CharacterBehaviour
             characterAnimations.AttackIdServer(1);
             MaxSpeed = maxSpeed;
             ShotStart(gameObject);
-            Invoke(nameof(Zoom), zoomInvoke);  
-        }
-        void Zoom()
-        {
-            cameraController.ToggleView(ZoomType.aiming,LerpType.constant);
+            Invoke(nameof(ZoomIn), zoomInInvoke);  
         }
         protected void OnEnable()
         {
@@ -111,6 +108,7 @@ namespace CharacterBehaviour
             if (IsOwner)
             {
                 //IsProjectile = true;
+                Invoke(nameof(ZoomOut),zoomOutInvoke);
             }
 
         }
@@ -140,7 +138,15 @@ namespace CharacterBehaviour
             // base.Spawn(ar,base.Owner);
         }
 */
+        void ZoomOut()
+        {
+            cameraController.ToggleView(ZoomType.standard,LerpType.soft);
 
+        }
+        void ZoomIn()
+        {
+            cameraController.ToggleView(ZoomType.aiming,LerpType.constant);
+        }
         public void EndDistance()
         {
             //characterAnimations.standardAttackId = 0;
@@ -148,7 +154,6 @@ namespace CharacterBehaviour
             rigs.SetRigWeightServer(0f, RigPart.distanceAim);
           //  rigs.SetRigWightLocal(0f, RigPart.distanceAim);
             characterAnimations.AttackIdServer(0);
-            cameraController.ToggleView(ZoomType.standard,LerpType.soft);
             
             playerManager.SwitchCurrentState(playerManager.standardState);
 

@@ -33,6 +33,9 @@ public class Weapon : Item, IOffensive
     [SerializeField] float _dmg;
     public float dmg => _dmg;
 
+   
+
+
     Vector3 _currentSource;
     public Vector3 currentSource => _currentSource;
 

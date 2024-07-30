@@ -10,7 +10,6 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
 {
     Rigidbody _rigidbody;
     Weapon _weapon;
-    Collider _collider;
     [SerializeField] float force = 20f;
     GameObject _owner;
     public bool isFly;
@@ -30,9 +29,6 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     [SerializeField] Transform visibleObj;
     [SerializeField] MiscOffset offset;
     
-    private void Awake()
-    {
-    }
     public void Init(Vector3 position, Quaternion rotation, GameObject owner, Inventory inventory = null)
     {
         // transform.position = position;
@@ -69,7 +65,7 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     public void ShotObserver(Vector3 pos, Quaternion rot)
     {
         SetAim();
-        transform.SetParent(null , true);
+        transform.SetParent(null);
         //_rigidbody.isKinematic = false;
         // transform.position = pos;
         //transform.rotation = rot;

@@ -155,18 +155,6 @@ public class CharacterAnimations : NetworkBehaviour
 
         _animator.SetBool("jump", isJump);
 
-        if (isJump)
-        {
-            jumpDuration += Time.deltaTime;
-            if(jumpDuration> 2f)
-            {
-                if(isGrounded)
-                {
-                    isJump = false;
-                }
-            }
-            
-        }
       
         _animator.SetBool("switch", isSwitch);
         _animator.SetBool("getHit", isGetHit);
@@ -198,15 +186,14 @@ public class CharacterAnimations : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void JumpServer()
+    public void JumpServer(bool toggle)
     {
-        JumpObserver();
+        JumpObserver(toggle);
     }
     [ObserversRpc(BufferLast = true)]
-    void JumpObserver()
+    void JumpObserver(bool toggle)
     {
-        isJump = true;
-        jumpDuration = 0f;
+        isJump = toggle;
     }
 
     IEnumerator ResetAttackId()

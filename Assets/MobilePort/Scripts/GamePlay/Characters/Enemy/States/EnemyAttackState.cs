@@ -71,7 +71,7 @@ _rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
         {
       
                 isDash = false;
-                //  cameraController.ToggleView(ZoomType.standard, LerpType.soft);
+                //  cameraController.ZoomOut(ZoomType.standard, LerpType.soft);
 
                // rigs.SetRigWeightServer(0f, RigPart.pelvisBoost, .2f);
                 //rigs.SetRigWeightServer(0f, RigPart.aim, .2f);

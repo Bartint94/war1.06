@@ -200,7 +200,7 @@ namespace CharacterBehaviour
             if (IsOwner)
             {
                 isDash = false;
-                //  cameraController.ToggleView(ZoomType.standard, LerpType.soft);
+                //  cameraController.ZoomOut(ZoomType.standard, LerpType.soft);
 
                 inventory.WeaponTriggerToggleServer(false, WeaponState.deffence);
 

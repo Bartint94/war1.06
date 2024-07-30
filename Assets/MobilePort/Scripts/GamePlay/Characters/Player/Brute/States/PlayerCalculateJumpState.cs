@@ -7,7 +7,7 @@ namespace CharacterBehaviour
     public class PlayerCalculateJumpState : CharacterState
     {
         bool isMovement;
-
+        float duration;
 
         [SerializeField] float maxJumpForce = 15f;
 
@@ -24,6 +24,7 @@ namespace CharacterBehaviour
                 playerInputs.isJumpCanceled = true;
             }
             isMovement = true;
+            duration = 0f;
         }
 
         public override void UpdateOwnerState()
@@ -38,9 +39,21 @@ namespace CharacterBehaviour
             if (playerInputs.isJumpCanceled)
             {
                 JumpForceValue = maxJumpForce;//jumpCurve.Evaluate(holdTime) * maxJumpForce;
-                characterAnimations.JumpServer();
+                characterAnimations.JumpServer(true);
                 isMovement = false;
                 playerInputs.isJumpCanceled = false;
+            }
+            else
+            {
+                duration += Time.deltaTime;
+                if(duration > 1f)
+                {
+                    if(IsGrounded)
+                    {
+                        characterAnimations.JumpServer(false);
+                        playerManager.SwitchCurrentState(playerManager.standardState);
+                    }
+                }
             }
 
             if (isMovement)
@@ -50,7 +63,7 @@ namespace CharacterBehaviour
 
             if(playerInputs.isAttackStarted)
             {
-                playerManager.SwitchCurrentState(playerManager.airAttackState);
+               // playerManager.SwitchCurrentState(playerManager.airAttackState);
             }
 
         }

@@ -99,8 +99,8 @@ MonoBehaviour:
   lerp: 0.2
   visibleObj: {fileID: 3598984002207370157}
   offset:
-    position: {x: -0.06712441, y: 0.48489484, z: 0.03326004}
-    rotation: {x: 0.32805878, y: -0.5987095, z: -0.631059, w: -0.36835974}
+    position: {x: 0.06554238, y: 0.46069664, z: 0.07093444}
+    rotation: {x: 0.49672204, y: -0.40334153, z: -0.36875293, w: -0.67424333}
 --- !u!1 &3770323849668103839
 GameObject:
   m_ObjectHideFlags: 0
