@@ -7,7 +7,8 @@ using UnityEngine;
 public enum WeaponState { attack, deffence }
 public interface IOffensive
 {
-    public bool CheckTarget(CharacterStateManager manager);
+    public bool IsValidatedHit(CharacterStateManager manager);
+    
 }
 public class Weapon : Item, IOffensive
 {
@@ -98,22 +99,7 @@ public class Weapon : Item, IOffensive
             CheckHitedReset();
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!IsServer) { return; }
-        if (other.TryGetComponent(out Weapon opponrntWeapon))
-        {
-            currentOpponent = opponrntWeapon.manager;
-            //attackState.AttackBlocked();
-            //      CheckHitedTest(other.gameObject);
-        }
-        if (other.TryGetComponent(out HitBox hitBox))
-        {
-            CheckHitedTest(other.gameObject);
-
-        }
-
-    }
+  
     [ObserversRpc]
     void CheckHitedTest(GameObject other)
     {
@@ -126,14 +112,14 @@ public class Weapon : Item, IOffensive
         hitedObjects.Clear();
     }
 
-    public bool CheckTarget(CharacterStateManager manger)
+    public bool IsValidatedHit(CharacterStateManager target)
     {
-        if(manger == this.manager)
+        if(target == manager)
         {
             return false;
         }
       
-        if (currentOpponent == this.manager)
+        if (currentOpponent == target)
         {
             return false;
         }
@@ -141,7 +127,7 @@ public class Weapon : Item, IOffensive
         {
             return false;
         }
-        
+        currentOpponent = target;
         return true;
         
     }

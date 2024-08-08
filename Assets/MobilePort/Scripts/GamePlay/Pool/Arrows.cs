@@ -31,20 +31,11 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     
     public void Init(Vector3 position, Quaternion rotation, GameObject owner, Inventory inventory = null)
     {
-        // transform.position = position;
-        // transform.rotation = rotation;
-        // _rigidbody = GetComponent<Rigidbody>();
-          // _rigidbody.isKinematic = true;
-       // if (IsServer)
-        {
-            // _weapon = GetComponent<Weapon>();
-            // _weapon = GetComponent<Weapon>();
-            // _weapon.manager = owner.GetComponent<CharacterStateManager>(); 
-            this.inventory = inventory;
-            transform.SetParent(inventory.itemHolders[1].transform, false);
-            transform.localPosition = offset.position;
-            transform.localRotation = offset.rotation;
-        }
+        this.inventory = inventory;
+        transform.SetParent(inventory.itemHolders[1].transform, false);
+        transform.localPosition = offset.position;
+        transform.localRotation = offset.rotation;
+
     }
 
     void SetAim()
@@ -53,12 +44,10 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
     }
- //   [ServerRpc(RequireOwnership = false)]
+
     public void Shot(Vector3 pos, Quaternion rot)
     {
-        // if (!IsServer) return;
-    
-      //  transform.SetParent(null, true);
+
         ShotObserver(pos, rot);
     }
     
@@ -66,11 +55,6 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     {
         SetAim();
         transform.SetParent(null);
-        //_rigidbody.isKinematic = false;
-        // transform.position = pos;
-        //transform.rotation = rot;
-        //_rigidbody.AddForce(transform.forward * force, ForceMode.Impulse);
-      
 
         duration = 0;
      
@@ -90,9 +74,9 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
            
             transform.Translate((transform.forward *  curve )+ (-Vector3.up * curveGrav), Space.World);
             VisibleObjCalculate();
-            //transform.position = Vector3.Lerp(forwardDir, gravityDir, speed);
+
         }
-        //transform.position = Vector3.Lerp()
+
         
     }
    
@@ -115,18 +99,14 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
         Debug.Log(other.name);
           if (other.TryGetComponent(out HitBox hitBox))
           {
-            if (CheckTarget(hitBox.manager))
+            if (IsValidatedHit(hitBox.manager))
               isFly = false;
-                 // _rigidbody.isKinematic = true;
-                 // transform.parent  = other.transform;
-                  //transform.localRotation = Quaternion.Euler(0, 0, 0);
-              
           }
        
         
     }
 
-    public bool CheckTarget(CharacterStateManager manager)
+    public bool IsValidatedHit(CharacterStateManager manager)
     {
         if (manager == this.manager)
         {

@@ -127,7 +127,18 @@ namespace CharacterBehaviour
         public abstract void TriggerStay(Collider other);
         public abstract void TriggerExit(Collider other);
         public abstract void AnimationEnd();
-        public abstract void BeforeSwitchState();
+        public virtual void BeforeSwitchState()
+        {
+            if (IsOwner)
+            {
+                characterAnimations.AttackIdServer(0);
+                if (cameraController != null)
+
+                    cameraController.ToggleView(ZoomType.standard, LerpType.soft);
+               
+                Debug.Log("bef");
+            }
+        }
 
 
         Ray ray;
@@ -143,7 +154,7 @@ namespace CharacterBehaviour
             {
                 distance = info.distance;
 
-                playerToGround = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, info.normal), info.normal);//Quaternion.FromToRotation(Vector3.up, info.normal);//Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(Vector3.up, info.normal), 6f);// * Time.deltaTime);//groundCurve.Evaluate(Time.deltaTime));//groundCurve.Evaluate(.25f));   
+                playerToGround = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, info.normal), info.normal);
                 PlayerRotX = playerToGround.x;   
                     
             }
@@ -163,8 +174,8 @@ namespace CharacterBehaviour
         }
         protected virtual void ReconcileAimingMovement()
         {
-            RootEulerY = playerLook.yRot;//playerManager.RootTransform.eulerAngles.y;
-          //  RootEulerX = playerManager.RootTransform.eulerAngles.x;
+            RootEulerY = playerLook.yRot;
+
             Aim();
         }
         float angle;
@@ -192,8 +203,6 @@ namespace CharacterBehaviour
         protected virtual void CancelAttack()
         {
             characterAnimations.standardAttackId = 0;
-
-           // inventory.WeaponTriggerToggleServer(false);
 
         }
 

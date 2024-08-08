@@ -4162,6 +4162,10 @@ PrefabInstance:
       propertyPath: _componentIndexCache
       value: 28
       objectReference: {fileID: 0}
+    - target: {fileID: 6346761528326759636, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.weight
+      value: 0.42
+      objectReference: {fileID: 0}
     - target: {fileID: 6784931398567074102, guid: 1620826405a41cc439e70c2c907e720c, type: 3}
       propertyPath: aim
       value: 

@@ -122,6 +122,7 @@ public class CameraController : MonoBehaviour
         a.localPosition = Vector3.zero + offset;
         yield return null;
     }
+    int debug;
     IEnumerator CamAimRot(Transform a, Transform b, float time)
     {
         
@@ -146,8 +147,8 @@ public class CameraController : MonoBehaviour
             yield return null;
 
         }
-      
-        a.localRotation = Quaternion.identity;
+        
+       // a.localRotation = Quaternion.identity;
        
         yield return null;
     }

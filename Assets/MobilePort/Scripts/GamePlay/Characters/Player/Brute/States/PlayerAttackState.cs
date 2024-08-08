@@ -1,3 +1,4 @@
+
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
@@ -105,28 +106,7 @@ namespace CharacterBehaviour
 
             rigs.UpdateRotationServer(RigPart.aim, rigs.aimSource.rotation);
 
-            /*
-
-            if (!isDash)
-            {
-              //  MaxSpeed = 0f;
-            }
-            else if (isStoped)
-            {
-                MaxSpeed = 0f;
-                IsStoped = true;
-            }
-            else
-            {
-
-                MaxSpeed = Mathf.Lerp(MaxSpeed, speed, acceleration * Time.deltaTime);
-                // IsSprint = true;
-                // Vertical *= 5f;
-                Vertical = 1f;
-
-            }
-
-            */
+   
             if (playerInputs.isJumpStarted)
             {
                 BeforeSwitchState();
@@ -136,16 +116,11 @@ namespace CharacterBehaviour
 
             if (inventory.currentWeapon.isHBDetected == true)
             {
-                // AnimatorAttackSpeedServer(0f);
-                //  Invoke(nameof(CancelAttackState), 1f);
                 cameraController.Shake(shakeDuration);
                 inventory.currentWeapon.isHBDetected = false;
-              //  elapsed = 0f;
+
             }
             
-
-               // elapsed = Mathf.Lerp(elapsed, maxSpeed, Time.deltaTime * speed);
-              //  characterAnimations.AnimatorAttackSpeedServer(elapsed);
         }
 
       
@@ -166,7 +141,7 @@ namespace CharacterBehaviour
 
         public void End()
         {
-            //BeforeSwitchState();
+            
         }
 
         public override void BeforeSwitchState()
@@ -200,7 +175,6 @@ namespace CharacterBehaviour
             if (IsOwner)
             {
                 isDash = false;
-                //  cameraController.ZoomOut(ZoomType.standard, LerpType.soft);
 
                 inventory.WeaponTriggerToggleServer(false, WeaponState.deffence);
 

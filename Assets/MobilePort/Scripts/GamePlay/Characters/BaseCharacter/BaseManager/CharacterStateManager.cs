@@ -62,7 +62,7 @@ namespace CharacterBehaviour
         public bool CheckHitValidation(IOffensive weapon)
         {
 
-            return weapon.CheckTarget(this);
+            return weapon.IsValidatedHit(this);
            
           
         }

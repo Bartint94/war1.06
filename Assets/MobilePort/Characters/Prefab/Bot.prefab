@@ -488,7 +488,7 @@ MonoBehaviour:
   lerpObject: {fileID: 172952907752290153}
   Weapon: {fileID: 0}
   bodyPartHit: 0
-  getHitTime: 2
+  getHitTime: 0.6
   lerp: 0
   trackingDistance: 1.2
 --- !u!114 &1533975841925309217

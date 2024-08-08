@@ -60,11 +60,11 @@ public class HitBox : NetworkBehaviour
 
             if (IsServer)
             {
-                if (!manager.CheckHitValidation(weapon))
+                if (!weapon.IsValidatedHit(manager))
                 {
                     return;
                 }
-
+                
                 //if (!other.CompareTag("Weapon")) return;
                 //poolzSystem.Spawn(bloodPs,transform.position);
                 //weapon.currentOpponent = manager;

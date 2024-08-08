@@ -13,9 +13,9 @@ public class ProjectileTrigger : MonoBehaviour, IOffensive
         arrow = GetComponentInParent<Arrows>();
         _collider = GetComponent<Collider>();
     }
-    public bool CheckTarget(CharacterStateManager manager)
+    public bool IsValidatedHit(CharacterStateManager manager)
     {
-        return arrow.CheckTarget(manager);
+        return arrow.IsValidatedHit(manager);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,7 +23,7 @@ public class ProjectileTrigger : MonoBehaviour, IOffensive
         Debug.Log(other.name);
         if (other.TryGetComponent(out HitBox hitBox))
         {
-            if (arrow.CheckTarget(hitBox.manager))
+            if (arrow.IsValidatedHit(hitBox.manager))
             {
                 arrow.isFly = false;
                 _collider.enabled = false;
