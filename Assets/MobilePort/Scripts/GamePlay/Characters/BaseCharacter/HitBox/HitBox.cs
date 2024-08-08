@@ -43,16 +43,7 @@ public class HitBox : NetworkBehaviour
         else
             body = transform;
     }
-  /*  public override void OnStartServer()
-    {
-        base.OnStartServer();
-        if(IsServer)
-        {
-            rbHb = GetComponent<Rigidbody>();
-            rbHb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-        }
-    }
-  */
+ 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out IOffensive weapon))
@@ -65,10 +56,7 @@ public class HitBox : NetworkBehaviour
                     return;
                 }
                 
-                //if (!other.CompareTag("Weapon")) return;
-                //poolzSystem.Spawn(bloodPs,transform.position);
-                //weapon.currentOpponent = manager;
-
+        
 
                 Vector3 hitPos = _collider.ClosestPointOnBounds(other.transform.position);
                 Vector3 raycastDirection = (other.transform.position - hitPos);
@@ -83,16 +71,7 @@ public class HitBox : NetworkBehaviour
                 rigs.SetRigWeightObserver(1f, RigPart.hit, .3f);
                 rigs.FollowSourcePositionObservers(other.transform/*weapon.transform*/, rigs.hitSource, 2f);
 
-                // poolzSystem.Spawn(poolzSystem.poolz[0].prefab, hitPos, spawnRot);
-                // poolzSystem.Spawn(poolzSystem.poolz[1].prefab, hitPos, spawnRot);
-                // int random = Random.Range(1, 60);
-                // sceneController.DmgText(random.ToString());
             }
-
-            //  poolzSystem.SpawnNobServer(poolzSystem.poolz[0].prefab,transform.position,spawnRot);
-            //poolzSystem.SpawnNobServer(poolzSystem.poolz[1].prefab,transform.position,spawnRot);
-
-            // manager.getHitState.Weapon = weapon.transform;
         }
     }
 
@@ -100,14 +79,7 @@ public class HitBox : NetworkBehaviour
     void HitVfxObservers(Weapon weapon, Vector3 source, Quaternion rot, Vector3 dir ,float dmg, GameObject go)
     {
         PoolzSystem.instance.Spawn(poolzSystem.poolz[0].prefab, source, rot, go,null);
-        // poolzSystem.Spawn(poolzSystem.poolz[1].prefab, source, rot, transform);
-        //  poolzSystem.Spawn(poolzSystem.poolz[3].prefab, source, rot, transform);
-        //poolzSystem.Spawn(poolzSystem.poolz[4].prefab, source, rot, transform);
-
-        //sceneController.DmgText(dmg.ToString());
-        ///weapon.isHBDetected = true;
-        //   manager.getHitState.Weapon = weapon.transform;
-        // manager.getHitState.bodyPartHit = _bodyPart;
+ 
         if (manager == null) return;
 
         manager.SwitchCurrentState(manager.getHitState);

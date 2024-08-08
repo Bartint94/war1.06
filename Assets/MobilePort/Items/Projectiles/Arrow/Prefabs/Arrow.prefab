@@ -50,10 +50,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b0c2688ec5ef249866261d9ba9c06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 1510917808567396934}
-  _networkObjectCache: {fileID: 1510917808567396934}
   force: 60
+  isFly: 0
+  flyCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  gravCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  mag: 0
+  lerp: 0
+  visibleObj: {fileID: 0}
+  offset:
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!54 &3933625071553579675
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -118,7 +134,6 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
-  - {fileID: 4422417894022272824}
   - {fileID: 8074976175423297752}
   - {fileID: -8670963775633048119}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
@@ -132,11 +147,11 @@ MonoBehaviour:
   _initializeOrder: 0
   _defaultDespawnType: 1
   NetworkObserver: {fileID: 0}
-  <PrefabId>k__BackingField: 11
+  <PrefabId>k__BackingField: 10
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 0
   <SceneId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 4206742454448837401
+  <AssetPathHash>k__BackingField: 14326501974763872097
 --- !u!114 &8074976175423297752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73696f3c70e6f95468d724b26507d6a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 1510917808567396934}
   _networkObjectCache: {fileID: 1510917808567396934}
   isRigged: 0
@@ -178,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402926ef33e0a894d9fec352693988ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 1510917808567396934}
   _networkObjectCache: {fileID: 1510917808567396934}
   _implementsPredictionMethods: 0

@@ -135,6 +135,7 @@ namespace CharacterBehaviour
                 if (cameraController != null)
 
                     cameraController.ToggleView(ZoomType.standard, LerpType.soft);
+                rigs.SetRigWeightServer(0, RigPart.distanceAim, .8f);
                
                 Debug.Log("bef");
             }

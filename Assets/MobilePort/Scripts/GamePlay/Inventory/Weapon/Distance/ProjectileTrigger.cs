@@ -8,10 +8,15 @@ public class ProjectileTrigger : MonoBehaviour, IOffensive
     Arrows arrow;
     Collider _collider;
 
+    public void ActivateDetection()
+    {
+        _collider.enabled = true;
+    }
     private void Awake()
     {
         arrow = GetComponentInParent<Arrows>();
         _collider = GetComponent<Collider>();
+        _collider.enabled = false;
     }
     public bool IsValidatedHit(CharacterStateManager manager)
     {

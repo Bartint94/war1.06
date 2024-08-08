@@ -10,6 +10,7 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
 {
     Rigidbody _rigidbody;
     Weapon _weapon;
+    ProjectileTrigger _projectileTrigger;
     [SerializeField] float force = 20f;
     GameObject _owner;
     public bool isFly;
@@ -28,7 +29,11 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     [SerializeField] float lerp;
     [SerializeField] Transform visibleObj;
     [SerializeField] MiscOffset offset;
-    
+
+    private void Awake()
+    {
+        _projectileTrigger = GetComponentInChildren<ProjectileTrigger>();
+    }
     public void Init(Vector3 position, Quaternion rotation, GameObject owner, Inventory inventory = null)
     {
         this.inventory = inventory;
@@ -53,11 +58,12 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     
     public void ShotObserver(Vector3 pos, Quaternion rot)
     {
+        _projectileTrigger.ActivateDetection();
         SetAim();
         transform.SetParent(null);
 
         duration = 0;
-     
+        
         isFly = true;
     }
     float test;
