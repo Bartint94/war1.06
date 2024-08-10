@@ -27,7 +27,7 @@ namespace CharacterBehaviour
             characterAnimations.AttackIdServer(1);
             MaxSpeed = maxSpeed;
             ShotStart(gameObject);
-            Invoke(nameof(ZoomIn), zoomInInvoke);  
+            ZoomIn();
         }
         protected void OnEnable()
         {
