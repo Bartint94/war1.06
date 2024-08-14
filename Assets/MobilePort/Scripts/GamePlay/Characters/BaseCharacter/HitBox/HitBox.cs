@@ -67,9 +67,9 @@ public class HitBox : NetworkBehaviour
                 HitVfxObservers(null, hitPos, spawnRot, hitForces2, 20f, gameObject);
                 if (rigs == null) return;
 
-                rigs.SetBodyWeightObserver(1f, _bodyPart, 0f);
-                rigs.SetRigWeightObserver(1f, RigPart.hit, .3f);
-                rigs.FollowSourcePositionObservers(other.transform/*weapon.transform*/, rigs.hitSource, 2f);
+              //  rigs.SetBodyWeightObserver(1f, _bodyPart, 0f);
+              //  rigs.SetRigWeightObserver(1f, RigPart.hit, .3f);
+               // rigs.FollowSourcePositionObservers(other.transform/*weapon.transform*/, rigs.hitSource, 2f);
 
             }
         }
@@ -83,7 +83,7 @@ public class HitBox : NetworkBehaviour
         if (manager == null) return;
 
         manager.SwitchCurrentState(manager.getHitState);
-        rb.AddForce(dir * 2, ForceMode.Impulse);
+        //rb.AddForce(dir * 15f + Vector3.up* 2f, ForceMode.Impulse);
         manager.myHealth.UpdateHealth(-20);
     }
 }

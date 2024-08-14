@@ -8,6 +8,9 @@ public class BloodAnimation : MonoBehaviour, ISpawnable
 {
     MeshRenderer[] frames;
     public int i;
+
+    [SerializeField] float lerp;
+
     [SerializeField] float minScale;
     [SerializeField] float maxScale;
  
@@ -20,6 +23,7 @@ public class BloodAnimation : MonoBehaviour, ISpawnable
     [SerializeField] Vector3 fallOffset;
     [SerializeField] Vector3 fallScale;
 
+
     [SerializeField] AnimationCurve curvePosition;
     [SerializeField] AnimationCurve curveZPos;
     [SerializeField] AnimationCurve curveScale;
@@ -28,6 +32,7 @@ public class BloodAnimation : MonoBehaviour, ISpawnable
 
     Transform owner;
     Vector3 ownerOffset;
+    Vector3 initPosition;
     
 
     private void Awake()
@@ -52,6 +57,7 @@ public class BloodAnimation : MonoBehaviour, ISpawnable
         isAnimated = true;
         elapsedTime = 0;
         i = 0;
+        transform.position = owner.position;
         while(i<framesLength)
         {
             //frames[i].enabled = false;
@@ -82,7 +88,10 @@ public class BloodAnimation : MonoBehaviour, ISpawnable
             else
             {
                 elapsedTime += Time.deltaTime;
-                transform.position = transform.position + (new Vector3(0, curvePosition.Evaluate(elapsedTime), 0));
+                transform.position = (transform.forward * curveZPos.Evaluate(elapsedTime) + initPosition +(new Vector3(0, curvePosition.Evaluate(elapsedTime), 0)));
+
+                initPosition = Vector3.Lerp(initPosition, owner.position, Time.deltaTime * lerp);
+                //transform.position = transform.position + (new Vector3(0, curvePosition.Evaluate(elapsedTime), 0));
             }
         }
         else
@@ -110,6 +119,7 @@ public class BloodAnimation : MonoBehaviour, ISpawnable
     public void Init(Vector3 position, Quaternion rotation, GameObject owner, Inventory inventory = null)
     {
         transform.position = position;
+        initPosition = position;
         if(isRotated)
         transform.rotation = rotation;
         else

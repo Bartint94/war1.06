@@ -36,6 +36,7 @@ namespace CharacterBehaviour
       
         public override void InitState()
         {
+            characterAnimations.isGetHit = true;
             weight = 1f;
             shaderHealth += .01f;
             BloodShadersServer(shaderHealth);
@@ -45,7 +46,6 @@ namespace CharacterBehaviour
                 BeforeSwitchState();
             if (enemyManager != null)
                 enemyManager.attackState.BeforeSwitchState();
-
       
             if (IsOwner)
             {
@@ -67,6 +67,8 @@ namespace CharacterBehaviour
             {
 
                 ReconcileStandardMovement();
+                Vertical = -1f;
+
                 characterAnimations.CalculateDirectionSpeed();
                 characterAnimations.UpdateAnimatorParameters();
                 playerLook.Look();
@@ -81,7 +83,7 @@ namespace CharacterBehaviour
 
                 if (weight <= 0f)
                 {
-                    
+                    characterAnimations.isGetHit = false;
                     rigs.SetRigWeightServer(0f, RigPart.hit, getHitTime);
                     
                     stopAnimationEvents = false;
