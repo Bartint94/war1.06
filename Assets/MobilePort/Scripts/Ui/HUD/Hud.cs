@@ -60,8 +60,10 @@ public class Hud : MonoBehaviour
             return;
         }
         playerInputs.isMobile = isMobile.isOn;
-   
-
+    }
+    public void SwitchCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
     }
  
 }

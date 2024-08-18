@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/MobilePort/Scenes/Katt 1.unity
     guid: 436c44782e8ca744aa850c50850f4422
   - enabled: 1
+    path: Assets/MobilePort/Scenes/TestScene.unity
+    guid: 12cfa5ad7e0fc8946b788e4a4a2449f9
+  - enabled: 1
     path: Assets/MobilePort/Scenes/Katt.unity
     guid: 27291333393ca674c9474244045c9809
   - enabled: 1

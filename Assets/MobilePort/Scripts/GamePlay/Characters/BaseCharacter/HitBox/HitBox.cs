@@ -34,7 +34,7 @@ public class HitBox : NetworkBehaviour
         if(manager!=null)
         {
             rbHb = GetComponent<Rigidbody>();
-            Destroy(rbHb); 
+           // Destroy(rbHb); 
         }
 
         poolzSystem = PoolzSystem.instance;

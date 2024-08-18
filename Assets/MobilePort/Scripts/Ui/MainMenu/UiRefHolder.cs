@@ -26,8 +26,8 @@ public class UiRefHolder : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         _customizeUi = GetComponentInChildren<CustomizeUI>();
         _inventoryUi = GetComponentInChildren<InventoryUi>();
-        instance = this;
     }
 }

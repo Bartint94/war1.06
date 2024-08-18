@@ -121,7 +121,7 @@ namespace CharacterBehaviour
             {
                 if (enemyManager != null)
                 {
-                 //   Destroy(enemyManager.enemyTarget.gameObject);
+                 //  Destroy(enemyManager.enemyTarget.gameObject);
                 }
             }
         }

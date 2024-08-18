@@ -64,7 +64,7 @@ public class CustomizeUI : UiButtons
         int reasult = await cloudSaveData.LoadData(baseTexKey);
         baseTexId = reasult;
 
-        baseSkin.materials[0].mainTexture = playerData.baseSkin[baseTexId];
+        baseSkin.materials[0].SetTexture("_BaseMap", playerData.baseSkin[baseTexId]);
 
         playerData.currentBaseSkinId = baseTexId;
 

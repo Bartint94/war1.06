@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 1, g: 1, b: 1, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.007
+  m_FogDensity: 0.003
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -5585,6 +5585,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2075322768562339437, guid: 07d69d48330434343a85bf376a54e550, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075322768562339437, guid: 07d69d48330434343a85bf376a54e550, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075322768562339437, guid: 07d69d48330434343a85bf376a54e550, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1092869548}
+    - target: {fileID: 2075322768562339437, guid: 07d69d48330434343a85bf376a54e550, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075322768562339437, guid: 07d69d48330434343a85bf376a54e550, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SwitchCursor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075322768562339437, guid: 07d69d48330434343a85bf376a54e550, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Hud, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075322768562339437, guid: 07d69d48330434343a85bf376a54e550, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5302025097712843176, guid: 07d69d48330434343a85bf376a54e550, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5622,6 +5650,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07d69d48330434343a85bf376a54e550, type: 3}
+--- !u!114 &1092869548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 402063153575475417, guid: 07d69d48330434343a85bf376a54e550, type: 3}
+  m_PrefabInstance: {fileID: 1092869547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1214e0292288f4791debdfdc84b959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1272675401
 PrefabInstance:
   m_ObjectHideFlags: 0

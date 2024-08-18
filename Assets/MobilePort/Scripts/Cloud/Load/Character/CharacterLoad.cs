@@ -18,7 +18,7 @@ public class CharacterLoad : NetworkBehaviour
         joints = GetComponentsInChildren<CharacterJoint>();
         foreach (CharacterJoint joint in joints)
         {
-            Destroy(joint);
+           // Destroy(joint);
         }
        // inventory = GetComponent<Inventory>();
     }
