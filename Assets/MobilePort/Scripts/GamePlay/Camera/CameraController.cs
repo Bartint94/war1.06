@@ -28,6 +28,8 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] float softLerp;
     [SerializeField] float rotationSpeed;
+
+    [SerializeField] float followSpeed;
     private void Start()
     {
         standardParent = cam.parent;
@@ -89,7 +91,7 @@ public class CameraController : MonoBehaviour
 
       //  float speed = Vector3.Distance(transform.position, standardFollowObject.position) * speedMultipiler;
         //transform.position = Vector3.MoveTowards(transform.position, standardFollowObject.position + Vector3.up, speed * Time.deltaTime);
-        transform.position = currentFollowObject.transform.position;
+        transform.position = Vector3.SmoothDamp(transform.position, currentFollowObject.transform.position,ref refVelocity, followSpeed * Time.deltaTime);
 
     }
    

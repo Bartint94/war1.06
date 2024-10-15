@@ -11,12 +11,12 @@ namespace CharacterBehaviour
     public class GetHitState : CharacterState
     {
         [SerializeField] Transform lerpObject;
-        public Transform Weapon;
-        public BodyPart bodyPartHit;
+        public Vector3 hitPosition;
+        public List<BodyPart> bodyPartHit;
 
         [SerializeField] float getHitTime;
         [SerializeField] float lerp;
-        [SerializeField] float trackingDistance = 5f;
+        
         
         SkinnedMeshRenderer[] _skinnedMeshRenderer;
         
@@ -25,7 +25,8 @@ namespace CharacterBehaviour
         [Range(0f, 1f)]
         float shaderHealth;
         float weight;
-
+        [SerializeField] float rootMotionMultipiler;
+        internal Vector3 direction;
 
         protected override void Awake()
         {
@@ -36,28 +37,31 @@ namespace CharacterBehaviour
       
         public override void InitState()
         {
-            characterAnimations.isGetHit = true;
-            weight = 1f;
-            shaderHealth += .01f;
-            BloodShadersServer(shaderHealth);
-            inventory.WeaponTriggerToggleServer(false, WeaponState.deffence);
-
-            if(playerManager != null)
-                BeforeSwitchState();
-            if (enemyManager != null)
-                enemyManager.attackState.BeforeSwitchState();
-      
+          
             if (IsOwner)
             {
+                characterManager.RootMotionDirection = direction;
+                Debug.Log($"direction  = {direction}");
+                characterManager.IsRootMotion = true;
+                characterAnimations.BoolAnimationServer(true, BoolAnimationType.getHit);
 
-                stopAnimationEvents = true;
+
+                weight = 1f;
+                shaderHealth += .01f;
+                BloodShadersServer(shaderHealth);
+
+
+
+                rigs.UpdateSourcePositionServer(hitPosition,RigPart.hit);
+                rigs.SetRigWeightServer(1f, RigPart.hit, lerp);
+
+                foreach (var part in bodyPartHit)
+                {
+                    rigs.SetBodyWeightServer(1f, part, 0f);
+                }
+
      
             }
-        }
-
-        public override void AnimationEnd()
-        {
-            
         }
 
         public override void UpdateOwnerState()
@@ -65,30 +69,23 @@ namespace CharacterBehaviour
 
             if (IsOwner)
             {
-
-                ReconcileStandardMovement();
-                Vertical = -1f;
-
+                playerManager.DashForce = playerManager.animations.RootMotionUpdate() * rootMotionMultipiler;
                 characterAnimations.CalculateDirectionSpeed();
                 characterAnimations.UpdateAnimatorParameters();
                 playerLook.Look();
 
-               
-            }
-
                 weight -= RigWeight(getHitTime);
 
 
-                
 
                 if (weight <= 0f)
                 {
-                    characterAnimations.isGetHit = false;
-                    rigs.SetRigWeightServer(0f, RigPart.hit, getHitTime);
-                    
-                    stopAnimationEvents = false;
-                    characterManager.SwitchCurrentState(characterManager.standardState, "getHit");
+                   // characterManager.SwitchCurrentState(characterManager.standardState, "getHit");
+
                 }
+
+            }
+
         }
 
         public override void UpdateServerState()
@@ -130,6 +127,21 @@ namespace CharacterBehaviour
             
         }
 
-      
+        public override void CancelState()
+        {
+            
+            rigs.SetRigWeightServer(0f, RigPart.hit, lerp);
+               
+
+            characterManager.IsRootMotion = false;
+            characterAnimations.BoolAnimationServer(false, BoolAnimationType.getHit);
+            
+            
+        }
+
+        public override void AnimationEnd()
+        {
+          
+        }
     }
 }

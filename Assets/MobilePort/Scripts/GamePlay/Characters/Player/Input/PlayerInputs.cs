@@ -13,7 +13,8 @@ public class PlayerInputs : NetworkBehaviour
     public bool isJumpPerformed;
     public bool isJumpCanceled;
 
-    public bool isAttackStarted;
+    public bool isAttack;
+    public bool isAttackHeavy;
 
     public bool isSprintPerformed;
 
@@ -73,9 +74,9 @@ public class PlayerInputs : NetworkBehaviour
             mobileInput = hud.MobileInputAccess;
             mobileInput.OpenInputCanvas();
             mobileInput.Initialize(out hit, out jump, out dash, out joy);
-            hit.onClick.AddListener(Hit);
-            jump.onClick.AddListener(Jump);
-            dash.onClick.AddListener(Dashr);
+            hit.onClick.AddListener(HitMobile);
+            jump.onClick.AddListener(JumpMobile);
+            dash.onClick.AddListener(DashMobile);
            
         }
     }
@@ -169,7 +170,8 @@ public class PlayerInputs : NetworkBehaviour
         isJumpPerformed = UnityEngine.Input.GetKey(KeyCode.Space);
         isJumpCanceled = UnityEngine.Input.GetKeyUp(KeyCode.Space);
 
-        isAttackStarted = UnityEngine.Input.GetKeyDown(KeyCode.Mouse0);
+        isAttack = UnityEngine.Input.GetKeyDown(KeyCode.Mouse0);
+        isAttackHeavy = Input.GetKeyDown(KeyCode.E);
 
         isSprintPerformed = UnityEngine.Input.GetKey(KeyCode.LeftShift);
 
@@ -186,19 +188,19 @@ public class PlayerInputs : NetworkBehaviour
     }
 
 
-        void Hit()
+        void HitMobile()
         {
-            isAttackStarted = true;
+            isAttack = true;
         }
-        void Jump()
+        void JumpMobile()
         {
             isJumpStarted = true;
-        Debug.Log("jump listener");
+            Debug.Log("jump listener");
         }
-        void Dashr()
+        void DashMobile()
         {
-            isDodge = true;
-        Debug.Log("dash listener");
+            isAttackHeavy = true;
+            Debug.Log("dash listener");
         }
 
     }

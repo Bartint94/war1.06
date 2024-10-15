@@ -4,7 +4,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-
+public enum AttackType { standard, heavy}
+public enum BoolAnimationType { jump, getHit }
 public class CharacterAnimations : NetworkBehaviour
 {
 
@@ -23,6 +24,7 @@ public class CharacterAnimations : NetworkBehaviour
     public bool isGetHit;
 
     public int standardAttackId;
+    public int heavyAttackId;   
     public int dashAttackId;
     internal int defAttackId;
 
@@ -142,14 +144,19 @@ public class CharacterAnimations : NetworkBehaviour
     {
         _animator.SetFloat("speedMultipiler", 1f);
     }
+
     public float RootMotionUpdate()
     {
-        return _animator.GetFloat("mSpeed");
+        if(IsOwner) 
+        return _animator.GetFloat("mSpeed"); 
+        else return 0f;
+      
     }
-
+    
     public void UpdateAnimatorParameters()
     {
-       
+
+        
         _animator.SetFloat("vertical", speedVelocityZ, 0.1f, Time.deltaTime);
         _animator.SetFloat("horizontal", speedVelocityX, 0.1f, Time.deltaTime);
 
@@ -160,6 +167,7 @@ public class CharacterAnimations : NetworkBehaviour
         _animator.SetBool("getHit", isGetHit);
 
         _animator.SetInteger("standardAttack", standardAttackId);
+        _animator.SetInteger("heavyAttack", heavyAttackId);
         _animator.SetInteger("dashAttack", dashAttackId);
         _animator.SetInteger("defAttack", defAttackId);
 
@@ -174,14 +182,35 @@ public class CharacterAnimations : NetworkBehaviour
 
 
     [ServerRpc(RequireOwnership = true)]
-    public void AttackIdServer(int id)
+    public void AttackIdServer(int id, AttackType type = AttackType.standard)
     {
-        AttackIdObservers(id);
+        AttackIdObservers(id, type);
     }
     [ObserversRpc(BufferLast = true, ExcludeOwner = false)]
-    public void AttackIdObservers(int id)
+    public void AttackIdObservers(int id, AttackType type = AttackType.standard)
     {
+        if(type == AttackType.standard)
         standardAttackId = id;
+
+        if(type == AttackType.heavy)
+            heavyAttackId = id;
+
+        //StartCoroutine(ResetAttackId());
+    }
+    [ServerRpc(RequireOwnership = true)]
+    public void BoolAnimationServer(bool value, BoolAnimationType type)
+    {
+        BoolAnimationObservers(value, type);
+    }
+    [ObserversRpc(BufferLast = true, ExcludeOwner = false)]
+    public void BoolAnimationObservers(bool value, BoolAnimationType type)
+    {
+        if (type == BoolAnimationType.getHit)
+            isGetHit = value;
+
+        if (type == BoolAnimationType.jump)
+            isJump = value;
+
         //StartCoroutine(ResetAttackId());
     }
 

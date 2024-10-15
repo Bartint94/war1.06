@@ -10,11 +10,11 @@ public class RotCon : MonoBehaviour
     [SerializeField] float offsetx;
     [SerializeField] float offsety;
     [SerializeField] float offsetz;
-    CharacterStateManager manager;
+    CharacterManager manager;
     public Quaternion test;
     private void Awake()
     {
-        manager = GetComponentInParent<CharacterStateManager>();
+        manager = GetComponentInParent<CharacterManager>();
         isBowAiming = true;
     }
     void Update()
@@ -23,7 +23,7 @@ public class RotCon : MonoBehaviour
         {
             return;
         }
-       // else
-       // transform.rotation = rot.localRotation;
+        else
+        transform.rotation = rot.rotation;
     }
 }

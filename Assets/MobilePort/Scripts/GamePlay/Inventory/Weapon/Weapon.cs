@@ -7,17 +7,17 @@ using UnityEngine;
 public enum WeaponState { attack, deffence }
 public interface IOffensive
 {
-    public bool IsValidatedHit(CharacterStateManager manager);
+    public bool IsValidatedHit(CharacterManager manager);
     
 }
 public class Weapon : Item, IOffensive
 {
     Collider _collider;
 
-    public CharacterStateManager manager;
+    public CharacterManager manager;
     public PlayerAttackState attackState;
 
-    public CharacterStateManager currentOpponent;
+    public CharacterManager currentOpponent;
 
     public bool isHBDetected;
 
@@ -112,7 +112,7 @@ public class Weapon : Item, IOffensive
         hitedObjects.Clear();
     }
 
-    public bool IsValidatedHit(CharacterStateManager target)
+    public bool IsValidatedHit(CharacterManager target)
     {
         if(target == manager)
         {

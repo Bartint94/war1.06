@@ -19,7 +19,7 @@ public class PoolzSystem : NetworkBehaviour
         instance = this;
         foreach (var spawner in poolz)
         {
-            Init(spawner);
+            InitPool(spawner);
         }
         inventory = GetComponent<Inventory>();
     }
@@ -33,7 +33,7 @@ public class PoolzSystem : NetworkBehaviour
 
        // ActivateNobObserver(ar, position, rotation, parent, inventory);
         ar.GetComponent<ISpawnable>().Init(position, rotation, parent, inventory);
-        //ar.GetComponent<ISpawnable>().Init(aim.position, aim.rotation, transform);
+        //ar.GetComponent<ISpawnable>().InitPool(aim.position, aim.rotation, transform);
         //GameObject ar = Instantiate(arrow.gameObject, aim.position, aim.rotation);
         //base.Spawn(ar, base.Owner);
         //SpawnProjectile();
@@ -48,7 +48,7 @@ public class PoolzSystem : NetworkBehaviour
         base.Spawn(ar);
         
          ar.GetComponent<ISpawnable>().Init(position, rotation, parent, inventory);
-        //ar.GetComponent<ISpawnable>().Init(aim.position, aim.rotation, transform);
+        //ar.GetComponent<ISpawnable>().InitPool(aim.position, aim.rotation, transform);
         //GameObject ar = Instantiate(arrow.gameObject, aim.position, aim.rotation);
         //base.Spawn(ar, base.Owner);
         //SpawnProjectile();
@@ -66,7 +66,7 @@ public class PoolzSystem : NetworkBehaviour
         //GameObject ar = Instantiate(arrow.gameObject,aim.position,aim.rotation);
         // base.Spawn(ar,base.Owner);
     }
-    void Init(Poolz spawner)
+    void InitPool(Poolz spawner)
     {
         spawner._pool = new ObjectPool<GameObject>(() =>
         {

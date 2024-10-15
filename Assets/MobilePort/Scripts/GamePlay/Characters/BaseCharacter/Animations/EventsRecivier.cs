@@ -7,14 +7,14 @@ using UnityEngine;
 public class EventsRecivier : NetworkBehaviour
 {
     Animator animator;
-    CharacterStateManager stateManager;
+    CharacterManager stateManager;
     Rigidbody rb;
     float speed;
     [SerializeField] float acc;
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        stateManager = GetComponent<CharacterStateManager>();
+        stateManager = GetComponent<CharacterManager>();
         rb = GetComponent<Rigidbody>();
     }
     void Start()

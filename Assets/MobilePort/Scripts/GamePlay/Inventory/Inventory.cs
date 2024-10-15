@@ -16,7 +16,7 @@ public class Inventory : NetworkBehaviour
 
     public ItemHolder[] itemHolders;
 
-    public CharacterStateManager characterStateManager;
+    public CharacterManager characterStateManager;
     public CharacterState characterState;
     public Weapon currentWeapon;
     public BlockDetector blockDetector;
@@ -34,7 +34,7 @@ public class Inventory : NetworkBehaviour
        // attackState = GetComponent<PlayerAttackState>();
         distanceAttack = GetComponent<PlayerDistanceAttackState>();
         itemHolders = GetComponentsInChildren<ItemHolder>();
-        characterStateManager = GetComponent<CharacterStateManager>();
+        characterStateManager = GetComponent<CharacterManager>();
         animator = GetComponent<Animator>();
         blockDetector = GetComponentInChildren<BlockDetector>();
         rigging = GetComponent<CharacterAnimationRiging>();
@@ -114,7 +114,7 @@ public class Inventory : NetworkBehaviour
             var weapon = PoolzSystem.instance.SpawnNob(playerData.weapons[weaponId].gameObject, Vector3.zero, Quaternion.identity,null,this);
             Destroy(weapon.GetComponent<NetworkObject>());
             weapon.gameObject.SetActive(true);
-            //weapon.Init(this);
+            //weapon.InitPool(this);
         }
     }
     void InitTorso(int itemId)
@@ -154,7 +154,7 @@ public class Inventory : NetworkBehaviour
    */
     public void WeaponTriggerToggle(bool turn, WeaponState wepaonState)
     {
-        if (characterStateManager.currentState == characterStateManager.getHitState)
+        if (characterStateManager.currentState == characterStateManager.getHitState && turn)
         {
             return;
         }

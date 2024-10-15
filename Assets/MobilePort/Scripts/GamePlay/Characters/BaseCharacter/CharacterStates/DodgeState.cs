@@ -25,7 +25,12 @@ namespace CharacterBehaviour
             
         }
 
-        public override void BeforeSwitchState()
+        public override void EndAnimation()
+        {
+            
+        }
+
+        public override void CancelState()
         {
             
         }
@@ -41,13 +46,13 @@ namespace CharacterBehaviour
 
                 playerInputs.UpdateInputs();
                 ReconcileStandardMovement();
-                IsDodge = true;
-                DashForce = dodgeDashForce;
-                IsDash = true;
+                characterManager.IsDodge = true;
+                characterManager.DashForce = dodgeDashForce;
+                characterManager.IsRootMotion = true;
                 
             }
             elapsed = 0f;
-            CancelAttack();
+            
         }
 
         public override void TriggerEneter(Collider other)
@@ -108,10 +113,10 @@ namespace CharacterBehaviour
             }
             if (weight <= 0f && elapsed >= minDodgeTime)
             {
-                StandardReturn();
+               // StandardReturn();
             }
             if (IsOwner)
-                if (playerInputs.isAttackStarted)
+                if (playerInputs.isAttack)
                 {
                     if(characterManager.isDistanceFighting)
                     {

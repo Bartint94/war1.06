@@ -29,7 +29,7 @@ namespace CharacterBehaviour
         [SerializeField] float dashSpeed;
 
         /*
-private void HitEnd()
+private void WeaponDetection()
 {
 if(currentId == 1)
 rightWeaponCollider.enabled = false;
@@ -37,7 +37,7 @@ if(currentId == 2)
 leftWeaponCollider.enabled = false;
 }
 
-private void Dash()
+private void IsRootMotion()
 {
 if (currentId == 1)
 rightWeaponCollider.enabled = true;
@@ -111,13 +111,14 @@ _rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
         public override void UpdateOwnerState()
         {
 
-            DashForce = characterAnimations.RootMotionUpdate() * dashSpeed;
-            _rigidbody.velocity = (transform.forward * DashForce) + Vector3.up * -9.8f;
+           // DashForce = characterAnimations.RootMotionUpdate() * rootMotionMultipiler;
+            _rigidbody.velocity = (transform.forward * characterManager.DashForce) + Vector3.up * -9.8f;
             
             elapsed += Time.deltaTime;
             if(elapsed > 1f)
             {
-                characterAnimations.AttackIdObservers(0);
+               
+                characterAnimations.AttackIdObservers(0,(AttackType)Random.Range(0,2));
                 enemyManager.SwitchCurrentState(enemyManager.standardState);
 
             }
@@ -135,14 +136,19 @@ _rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
 
         public override void AnimationEnd()
         {
-            BeforeSwitchState();
+            EndAnimation();
             enemyManager.SwitchCurrentState(enemyManager.standardState);
         }
 
       
-        public override void BeforeSwitchState()
+        public override void EndAnimation()
         {
-            characterAnimations.AttackIdObservers(0);
+            characterAnimations.AttackIdObservers(0, (AttackType)Random.Range(0, 2));
+            
+        }
+
+        public override void CancelState()
+        {
             
         }
     }

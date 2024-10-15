@@ -18,7 +18,7 @@ public class ProjectileTrigger : MonoBehaviour, IOffensive
         _collider = GetComponent<Collider>();
         _collider.enabled = false;
     }
-    public bool IsValidatedHit(CharacterStateManager manager)
+    public bool IsValidatedHit(CharacterManager manager)
     {
         return arrow.IsValidatedHit(manager);
     }

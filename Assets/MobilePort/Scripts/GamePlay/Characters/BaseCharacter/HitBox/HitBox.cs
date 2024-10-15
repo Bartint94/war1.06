@@ -10,22 +10,30 @@ public enum BodyPart {LegLeft,LegRight,Spin,ArmLeft,ArmRight,Head};
 public class HitBox : NetworkBehaviour
 {
     public BodyPart _bodyPart;
-    public CharacterStateManager manager;
+    public CharacterManager manager;
+    Inventory inventory;
     //public GameObject bloodPs;
 
-    Rigidbody rb;
-    Rigidbody rbHb;
+   // Rigidbody rb;
+   // Rigidbody rbHb;
     PoolzSystem poolzSystem;
     Collider _collider;
     CharacterAnimationRiging rigs;
     Transform body;
 
+
+
+    Vector3 hitSource;
+    Vector3 hitDirection;
+    Vector3 hitDirectionNormalized;
+    Quaternion spawnRot;
     private void Awake()
     {
         rigs = GetComponentInParent<CharacterAnimationRiging>();    
-        manager = GetComponentInParent<CharacterStateManager>();
+        inventory = GetComponentInParent<Inventory>();
+        manager = GetComponentInParent<CharacterManager>();
         if(manager != null )
-        rb = manager.GetComponent<Rigidbody>();
+       // rb = manager.GetComponent<Rigidbody>();
 
         _collider = GetComponent<Collider>();
     }
@@ -33,7 +41,7 @@ public class HitBox : NetworkBehaviour
     {
         if(manager!=null)
         {
-            rbHb = GetComponent<Rigidbody>();
+            //rbHb = GetComponent<Rigidbody>();
            // Destroy(rbHb); 
         }
 
@@ -48,41 +56,60 @@ public class HitBox : NetworkBehaviour
     {
         if (other.TryGetComponent(out IOffensive weapon))
         {
-
+           
             if (IsServer)
             {
                 if (!weapon.IsValidatedHit(manager))
                 {
                     return;
                 }
-                
-        
 
-                Vector3 hitPos = _collider.ClosestPointOnBounds(other.transform.position);
-                Vector3 raycastDirection = (other.transform.position - hitPos);
-                Vector3 hitForces = (hitPos - other.transform.position ).normalized;
-                Vector3 hitForces2 = (other.transform.position - transform.position).normalized;
-                Quaternion spawnRot = Quaternion.LookRotation(raycastDirection,Vector3.up);
-                //spawnRot = other.transform.rotation;
-                HitVfxObservers(null, hitPos, spawnRot, hitForces2, 20f, gameObject);
-                if (rigs == null) return;
+                LockWeapon();
 
-              //  rigs.SetBodyWeightObserver(1f, _bodyPart, 0f);
-              //  rigs.SetRigWeightObserver(1f, RigPart.hit, .3f);
-               // rigs.FollowSourcePositionObservers(other.transform/*weapon.transform*/, rigs.hitSource, 2f);
+                hitSource = _collider.ClosestPointOnBounds(other.transform.position);
 
+
+                hitDirection = (other.transform.position - hitSource);
+                spawnRot = Quaternion.LookRotation(hitDirection, Vector3.up);
+
+                if(hitDirectionNormalized != Vector3.zero)
+                {
+                    hitDirectionNormalized = new Vector3(hitDirection.x, 0f, hitDirection.z);
+
+                }
+                else
+                {
+                    hitDirectionNormalized = new Vector3(Random.Range(-1f,1f), 0f, Random.Range(-1f, 1f));
+                    Debug.Log("RandomDirection");
+                }
+                hitDirectionNormalized.Normalize();
+
+                HitVfxObservers(hitSource, hitDirectionNormalized, spawnRot, 20f, gameObject);
             }
+
         }
     }
 
+    private void LockWeapon()
+    {
+        inventory.WeaponTriggerToggle(false, WeaponState.deffence);
+    }
+
     [ObserversRpc]
-    void HitVfxObservers(Weapon weapon, Vector3 source, Quaternion rot, Vector3 dir ,float dmg, GameObject go)
+    void HitVfxObservers(Vector3 source, Vector3 dir, Quaternion rot, float dmg, GameObject go)
     {
         PoolzSystem.instance.Spawn(poolzSystem.poolz[0].prefab, source, rot, go,null);
  
         if (manager == null) return;
+        if (IsOwner)
+        {
+            manager.getHitState.direction = dir;
+            manager.getHitState.hitPosition = source;
+            manager.getHitState.bodyPartHit.Add(_bodyPart);
 
-        manager.SwitchCurrentState(manager.getHitState);
+            manager.SwitchCurrentState(manager.getHitState);
+        }
+
         //rb.AddForce(dir * 15f + Vector3.up* 2f, ForceMode.Impulse);
         manager.myHealth.UpdateHealth(-20);
     }

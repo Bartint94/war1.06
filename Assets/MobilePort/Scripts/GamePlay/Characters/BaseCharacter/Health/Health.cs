@@ -11,10 +11,10 @@ public class Health : NetworkBehaviour
     [SerializeField] int health = 100;
     int maxHeath;
     [SerializeField] RectTransform healthBar;
-    CharacterStateManager stateManager;
+    CharacterManager stateManager;
     private void Awake()
     {
-        stateManager = GetComponent<CharacterStateManager>();
+        stateManager = GetComponent<CharacterManager>();
         maxHeath = health;
     }
    

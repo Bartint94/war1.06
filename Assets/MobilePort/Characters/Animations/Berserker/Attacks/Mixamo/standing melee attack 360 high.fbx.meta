@@ -48,7 +48,7 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
@@ -100,42 +100,58 @@ ModelImporter:
             time: 0.43888888
             value: 0
             inSlope: -0.009072512
-            outSlope: -2.935907
+            outSlope: -0.96922386
             tangentMode: 1
             weightedMode: 0
             inWeight: 0.5575481
-            outWeight: 0.1033654
+            outWeight: 0.43569317
           - serializedVersion: 3
-            time: 0.58287054
-            value: -0.18215622
-            inSlope: 0.12887712
-            outSlope: 0.12887712
+            time: 0.5739289
+            value: -0.076328754
+            inSlope: -0.95945555
+            outSlope: 1.8592993
             tangentMode: 1
             weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
+            inWeight: 0.3726761
+            outWeight: 0.69757336
           - serializedVersion: 3
-            time: 0.72777784
-            value: 0
-            inSlope: 2.734078
-            outSlope: 0.044420473
+            time: 0.6407417
+            value: -0.002380371
+            inSlope: 1.9020478
+            outSlope: 0.62726796
             tangentMode: 1
             weightedMode: 0
-            inWeight: 0.10851658
-            outWeight: 0.4260203
+            inWeight: 0.7367425
+            outWeight: 0.40600708
+          - serializedVersion: 3
+            time: 0.76053804
+            value: 0.0616095
+            inSlope: 0.18615454
+            outSlope: -1.0186559
+            tangentMode: 1
+            weightedMode: 0
+            inWeight: 0.91873866
+            outWeight: 0.27292362
           - serializedVersion: 3
             time: 1
             value: 0
-            inSlope: 0
-            outSlope: 0
+            inSlope: -0.0382599
+            outSlope: -0.0382599
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0
+            inWeight: 0.45675313
             outWeight: 0
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 4
       events:
+      - time: 0
+        functionName: Init
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.20364273
         functionName: Dash
         data: 
@@ -150,7 +166,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.62211263
+      - time: 0.60580605
         functionName: End
         data: 
         objectReferenceParameter: {instanceID: 0}

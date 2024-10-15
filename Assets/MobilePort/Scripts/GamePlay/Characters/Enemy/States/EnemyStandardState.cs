@@ -32,7 +32,7 @@ namespace CharacterBehaviour
 
         public override void UpdateOwnerState()
         {
-            if (IsGrounded)
+            if (characterManager.IsGrounded)
             {
                 characterAnimations.CalculateDirectionSpeed();
                 characterAnimations.UpdateAnimatorParameters();
@@ -86,7 +86,7 @@ namespace CharacterBehaviour
           
         }
 
-        public override void BeforeSwitchState()
+        public override void EndAnimation()
         {
      
         }
@@ -94,6 +94,11 @@ namespace CharacterBehaviour
         public override void InitState()
         {
            
+        }
+
+        public override void CancelState()
+        {
+            
         }
     }
 }

@@ -14,14 +14,12 @@ namespace CharacterBehaviour
         protected float sensivity;
         protected float turnSmoothTime;
 
-        public bool stopAnimationEvents;
-
         protected CharacterAnimations characterAnimations;
         protected CharacterAnimationRiging rigs;
         protected PlayerInputs playerInputs;
-        protected PlayerStateManager playerManager;
+        protected PlayerManager playerManager;
         protected EnemyStateManager enemyManager;
-        protected CharacterStateManager characterManager;
+        protected CharacterManager characterManager;
         protected PlayerLook playerLook;
         protected Inventory inventory;
         protected CameraController cameraController;
@@ -34,45 +32,17 @@ namespace CharacterBehaviour
 
         protected float holdStartTime;
 
-        #region ReplicateData
-        public bool IsJump { get; internal set; }
-        public bool IsDash { get; internal set; }
-        public bool IsGrounded;// { get; internal set; }
-        public bool IsSprint { get; internal set; }
-        public bool IsMaxSpeed { get; internal set; }
-        public bool IsGetHit { get; internal set; }
-        public bool IsDodge { get; internal set; }
-
-
-        public float RootEulerY { get; internal set; }
-        public float RootEulerX { get; internal set; }
-        public float Horizontal { get; internal set; }
-        public float Vertical { get; internal set; }
-        public float MaxSpeed { get; internal set; }    
-        public float CameraHorizontal { get; internal set; }
-        public float JumpForceValue { get; internal set; }
-        public float DashForce { get; internal set; }
-        public bool IsStoped { get; internal set; }
-        public float AimY { get; internal set; }
-        public float PlayerRotX { get; internal set; }
-        public float PlayerRotZ { get; internal set; }
-        public bool IsProjectile { get; internal set; }
-        #endregion
-
-
         #region private
         float distance;
         private float turnSmoothVel;
         #endregion
 
-
         protected virtual void Awake()
         {
-            //isDistanceFighting = true;
             characterAnimations = GetComponentInChildren<CharacterAnimations>();
             playerInputs = GetComponent<PlayerInputs>();
             rigs = GetComponent<CharacterAnimationRiging>();
-            characterManager = GetComponent<CharacterStateManager>();
+            characterManager = GetComponent<CharacterManager>();
             animator = GetComponentInChildren<Animator>();
             _rigidbody = GetComponent<Rigidbody>();
             playerLook = GetComponent<PlayerLook>();
@@ -82,7 +52,7 @@ namespace CharacterBehaviour
             
 
 
-            if (TryGetComponent(out PlayerStateManager playerManager))
+            if (TryGetComponent(out PlayerManager playerManager))
             {
                 this.playerManager = playerManager;
             }
@@ -108,37 +78,15 @@ namespace CharacterBehaviour
 
         public abstract void InitState();
         public abstract void UpdateOwnerState();
-        /*{
-            SurfaceAligment();
-            characterAnimations.CalculateDirectionSpeed();
-            characterAnimations.UpdateAnimatorParameters();
-            if (IsGrounded)
-            {
-            }
-            else
-            {
-                characterAnimations.OrginalAnimatorSpeed();
-            }
-        }*/
-
-       
         public abstract void UpdateServerState();
         public abstract void TriggerEneter(Collider other);
         public abstract void TriggerStay(Collider other);
         public abstract void TriggerExit(Collider other);
         public abstract void AnimationEnd();
-        public virtual void BeforeSwitchState()
+        public abstract void CancelState();
+        public virtual void EndAnimation()
         {
-            if (IsOwner)
-            {
-                characterAnimations.AttackIdServer(0);
-                if (cameraController != null)
-
-                    cameraController.ToggleView(ZoomType.standard, LerpType.soft);
-                rigs.SetRigWeightServer(0, RigPart.distanceAim, .8f);
-               
-                Debug.Log("bef");
-            }
+            Debug.Log("Animation End Func!!!");
         }
 
 
@@ -156,26 +104,26 @@ namespace CharacterBehaviour
                 distance = info.distance;
 
                 playerToGround = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, info.normal), info.normal);
-                PlayerRotX = playerToGround.x;   
+                characterManager.PlayerRotX = playerToGround.x;   
                     
             }
             if (distance<1.25f)
-                IsGrounded = true;
+                characterManager.IsGrounded = true;
             else 
-                IsGrounded = false;
+                characterManager.IsGrounded = false;
 
         }
 
         protected virtual void ReconcileStandardMovement()
         {
-            Horizontal = playerInputs.horizontal;
-            Vertical = playerInputs.vertical;
-            IsSprint = playerInputs.isSprintPerformed;
+            characterManager.Horizontal = playerInputs.horizontal;
+            characterManager.Vertical = playerInputs.vertical;
+            characterManager.IsSprint = playerInputs.isSprintPerformed;
             ReconcileAimingMovement();
         }
         protected virtual void ReconcileAimingMovement()
         {
-            RootEulerY = playerLook.yRot;
+            characterManager.RootEulerY = playerLook.yRot;
 
             Aim();
         }
@@ -197,15 +145,8 @@ namespace CharacterBehaviour
             var result = weight / times;
             return result;
         }
-        protected virtual void StandardReturn()
-        {
-            characterManager.SwitchCurrentState(characterManager.standardState);
-        }
-        protected virtual void CancelAttack()
-        {
-            characterAnimations.standardAttackId = 0;
-
-        }
+       
+     
 
 
 

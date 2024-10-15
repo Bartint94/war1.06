@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace CharacterBehaviour
 {
-    public class EnemyStateManager : CharacterStateManager
+    public class EnemyStateManager : CharacterManager
     {
         [SerializeField] Transform sourceObject;
         public EnemyTarget enemyTarget;

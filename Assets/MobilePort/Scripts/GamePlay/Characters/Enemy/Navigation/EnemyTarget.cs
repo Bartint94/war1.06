@@ -11,7 +11,7 @@ public class EnemyTarget : NetworkBehaviour
     [SerializeField] float randDistance = 10f;
 
     public EnemyStateManager ownerManager;
-    public CharacterStateManager currentTargetManager;
+    public CharacterManager currentTargetManager;
     Transform ownerTransform;
 
     public float ownerDistance;
@@ -78,20 +78,20 @@ public class EnemyTarget : NetworkBehaviour
     {
         transform.SetParent(target, true);
         transform.localPosition = Vector3.zero+Vector3.up*2f;
-        currentTargetManager = target.GetComponent<CharacterStateManager>();
+        currentTargetManager = target.GetComponent<CharacterManager>();
         isTargetSpotted = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out CharacterStateManager characterManager))
+        if (other.TryGetComponent(out CharacterManager characterManager))
         {
             nearTargets.Add(characterManager.transform);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out CharacterStateManager characterManager))
+        if (other.TryGetComponent(out CharacterManager characterManager))
         {
             nearTargets.Remove(characterManager.transform);
         }

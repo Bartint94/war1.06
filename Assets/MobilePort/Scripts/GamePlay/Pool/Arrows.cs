@@ -15,7 +15,7 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     GameObject _owner;
     public bool isFly;
     Inventory inventory;
-    CharacterStateManager manager => inventory.characterStateManager;
+    CharacterManager manager => inventory.characterStateManager;
 
 
     [SerializeField] AnimationCurve flyCurve;
@@ -112,7 +112,7 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
         
     }
 
-    public bool IsValidatedHit(CharacterStateManager manager)
+    public bool IsValidatedHit(CharacterManager manager)
     {
         if (manager == this.manager)
         {

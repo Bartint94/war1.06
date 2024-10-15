@@ -131,9 +131,14 @@ namespace CharacterBehaviour
             
         }
 
-        public override void BeforeSwitchState()
+        public override void EndAnimation()
         {
             
+        }
+
+        public override void CancelState()
+        {
+            throw new System.NotImplementedException();
         }
     }
 
