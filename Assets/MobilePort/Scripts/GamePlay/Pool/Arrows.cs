@@ -29,6 +29,7 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
     [SerializeField] float lerp;
     [SerializeField] Transform visibleObj;
     [SerializeField] MiscOffset offset;
+    [SerializeField] float dmg;
 
     private void Awake()
     {
@@ -120,5 +121,15 @@ public class Arrows : MonoBehaviour, ISpawnable, IOffensive
         }
         else
             return true;
+    }
+
+    public float Dmg()
+    {
+        return dmg;
+    }
+
+    public void GetManager(out CharacterManager manager)
+    {
+        manager = this.manager; 
     }
 }

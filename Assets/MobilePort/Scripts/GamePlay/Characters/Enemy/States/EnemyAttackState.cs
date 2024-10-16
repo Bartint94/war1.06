@@ -111,9 +111,14 @@ _rigidbody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
         public override void UpdateOwnerState()
         {
 
-           // DashForce = characterAnimations.RootMotionUpdate() * rootMotionMultipiler;
-            _rigidbody.velocity = (transform.forward * characterManager.DashForce) + Vector3.up * -9.8f;
-            
+            // DashForce = characterAnimations.RootMotionUpdate() * rootMotionMultipiler;
+            _rigidbody.AddForce(0, -9.80665f, 0);
+            if (_rigidbody.velocity.magnitude < maxMoveVelocity)
+            {
+                _rigidbody.AddForce(transform.forward * _moveRate, ForceMode.Force);
+
+            }
+
             elapsed += Time.deltaTime;
             if(elapsed > 1f)
             {

@@ -101,6 +101,7 @@ MonoBehaviour:
   offset:
     position: {x: 0.0627, y: 0.5414, z: 0.0049}
     rotation: {x: 0.5520376, y: -0.4280681, z: -0.35125336, w: -0.6234045}
+  dmg: 10
 --- !u!1 &3770323849668103839
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e15762ae9efaa841804a6c4d83115be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmg: 0
 --- !u!65 &4029880976118127794
 BoxCollider:
   m_ObjectHideFlags: 0

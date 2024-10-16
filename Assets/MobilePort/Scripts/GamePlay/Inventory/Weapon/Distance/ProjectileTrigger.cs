@@ -7,7 +7,7 @@ public class ProjectileTrigger : MonoBehaviour, IOffensive
 {
     Arrows arrow;
     Collider _collider;
-
+    [SerializeField] float dmg;
     public void ActivateDetection()
     {
         _collider.enabled = true;
@@ -43,5 +43,13 @@ public class ProjectileTrigger : MonoBehaviour, IOffensive
 
     }
 
-   
+    public float Dmg()
+    {
+        return arrow.Dmg();
+    }
+
+    public void GetManager(out CharacterManager manager)
+    {
+       arrow.GetManager(out manager);
+    }
 }

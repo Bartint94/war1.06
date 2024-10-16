@@ -112,7 +112,7 @@ MonoBehaviour:
   holdRotation: {x: 355.6546, y: 260.25214, z: 282.81943}
   controller: {fileID: 9100000, guid: c9b75da194d9dc24c8cff8526f146609, type: 2}
   vfx: {fileID: 0}
-  _dmg: 0
+  _dmg: 5
   currentWeaponState: 0
   hitedObjects: []
 --- !u!65 &2231546189439271338

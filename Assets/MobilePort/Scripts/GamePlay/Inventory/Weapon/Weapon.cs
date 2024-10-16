@@ -7,7 +7,9 @@ using UnityEngine;
 public enum WeaponState { attack, deffence }
 public interface IOffensive
 {
+    public float Dmg();
     public bool IsValidatedHit(CharacterManager manager);
+    public void GetManager(out CharacterManager manager);
     
 }
 public class Weapon : Item, IOffensive
@@ -130,6 +132,16 @@ public class Weapon : Item, IOffensive
         currentOpponent = target;
         return true;
         
+    }
+
+    public float Dmg()
+    {
+        return dmg;
+    }
+
+    public void GetManager(out CharacterManager manager)
+    {
+        manager = this.manager;
     }
 }
 

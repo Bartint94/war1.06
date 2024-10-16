@@ -46,7 +46,7 @@ namespace CharacterBehaviour
             _rigidbody.AddForce(0, -9.80665f, 0);
             if (_rigidbody.velocity.magnitude < maxMoveVelocity)
             {
-                _rigidbody.AddForce(transform.forward * _moveRate);
+                _rigidbody.AddForce(transform.forward * _moveRate,ForceMode.Force);
 
             }
 

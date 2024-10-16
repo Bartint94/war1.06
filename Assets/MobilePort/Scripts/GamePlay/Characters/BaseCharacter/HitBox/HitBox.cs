@@ -72,6 +72,9 @@ public class HitBox : NetworkBehaviour
                 hitDirection = (other.transform.position - hitSource);
                 spawnRot = Quaternion.LookRotation(hitDirection, Vector3.up);
 
+                CharacterManager weaponManager = null;
+                weapon.GetManager(out weaponManager);
+                hitDirection += (transform.position - weaponManager.transform.position).normalized;
                 if(hitDirectionNormalized != Vector3.zero)
                 {
                     hitDirectionNormalized = new Vector3(hitDirection.x, 0f, hitDirection.z);
@@ -84,7 +87,7 @@ public class HitBox : NetworkBehaviour
                 }
                 hitDirectionNormalized.Normalize();
 
-                HitVfxObservers(hitSource, hitDirectionNormalized, spawnRot, 20f, gameObject);
+                HitVfxObservers(hitSource, hitDirectionNormalized, spawnRot, weapon.Dmg(), gameObject);
             }
 
         }
@@ -101,9 +104,12 @@ public class HitBox : NetworkBehaviour
         PoolzSystem.instance.Spawn(poolzSystem.poolz[0].prefab, source, rot, go,null);
  
         if (manager == null) return;
+
+        manager._rigidbody.AddForce(dir * dmg, ForceMode.Impulse);
+
         if (IsOwner)
         {
-            manager.getHitState.direction = dir;
+            //manager.getHitState.direction = dir;
             manager.getHitState.hitPosition = source;
             manager.getHitState.bodyPartHit.Add(_bodyPart);
 

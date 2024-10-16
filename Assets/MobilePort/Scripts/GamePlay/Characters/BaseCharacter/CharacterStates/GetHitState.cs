@@ -40,9 +40,9 @@ namespace CharacterBehaviour
           
             if (IsOwner)
             {
-                characterManager.RootMotionDirection = direction;
+                //characterManager.RootMotionDirection = direction;
                 Debug.Log($"direction  = {direction}");
-                characterManager.IsRootMotion = true;
+               // characterManager.IsRootMotion = true;
                 characterAnimations.BoolAnimationServer(true, BoolAnimationType.getHit);
 
 
@@ -135,7 +135,7 @@ namespace CharacterBehaviour
 
             characterManager.IsRootMotion = false;
             characterAnimations.BoolAnimationServer(false, BoolAnimationType.getHit);
-            
+            bodyPartHit.Clear();
             
         }
 
