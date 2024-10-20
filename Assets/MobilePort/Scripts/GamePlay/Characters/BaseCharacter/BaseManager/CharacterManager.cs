@@ -13,6 +13,7 @@ namespace CharacterBehaviour
     public class CharacterManager : NetworkBehaviour
     {
         public Rigidbody _rigidbody;
+        internal Collider mainCollider;
         public Transform body;
         public Inventory inventory;
 
@@ -34,6 +35,8 @@ namespace CharacterBehaviour
         public bool isDistanceFighting;
 
         public bool isBot;
+
+        public bool isDead;
 
 
 
@@ -79,6 +82,7 @@ namespace CharacterBehaviour
             getHitState = GetComponent<GetHitState>();
             animations = GetComponent<CharacterAnimations>();
             dyingState = GetComponent<DyingState>();
+            mainCollider = GetComponent<Collider>();
         }
         public virtual void SwitchCurrentState(CharacterState state, string debug = "charscter")
         {

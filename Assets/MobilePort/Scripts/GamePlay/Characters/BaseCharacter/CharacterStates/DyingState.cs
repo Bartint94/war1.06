@@ -25,6 +25,9 @@ namespace CharacterBehaviour
         
         public override void InitState()
         {
+            characterManager.mainCollider.isTrigger = true;
+            characterManager._rigidbody.isKinematic = true;
+            characterManager.isDead = true;
             characterManager.Horizontal = 0;
             characterManager.Vertical = 0;
             characterAnimations.BoolAnimationServer(true, BoolAnimationType.die);

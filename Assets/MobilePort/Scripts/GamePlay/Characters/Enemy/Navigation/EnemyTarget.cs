@@ -11,13 +11,13 @@ public class EnemyTarget : NetworkBehaviour
     [SerializeField] float randDistance = 10f;
 
     public EnemyStateManager ownerManager;
-    public CharacterManager currentTargetManager;
     Transform ownerTransform;
+    public CharacterManager currentTargetManager;
 
-    public float ownerDistance;
+    public float distance;
     public float ownerY;
 
-    public List<Transform> nearTargets;
+    public List<CharacterManager> nearTargets;
     //public List<Transform> spottedPlayers;
 
     public float angle;
@@ -38,7 +38,7 @@ public class EnemyTarget : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        ownerDistance = Vector3.Distance(transform.position, ownerTransform.position);
+        distance = Vector3.Distance(transform.position, ownerTransform.position);
         ownerY = ownerTransform.position.y;
         if(isTargetSpotted)
         {
@@ -58,42 +58,50 @@ public class EnemyTarget : NetworkBehaviour
     }
     void VisibilityAngleCalculation()
     {
-        foreach (Transform t in nearTargets)
+        foreach (var target in nearTargets)
         {
-            Vector3 dir = (t.position - ownerTransform.position).normalized;
+            Vector3 dir = (target.transform.position - ownerTransform.position).normalized;
             angle = Vector3.Dot(ownerTransform.forward, dir);
             if(angle > 0.1f)
             {
-                PlayerSpotted(t);
+                PlayerSpotted(target.transform);
                 return;
             }
         }
     }
     void RandomTargetPosition()
     {
-        if (ownerDistance > 1f) return;
+        if (distance > 1f) return;
             transform.position = new Vector3(transform.position.x + Random.Range(-randDistance, randDistance), ownerY, transform.position.z + Random.Range(-randDistance, randDistance));
     }
     void PlayerSpotted(Transform target)
     {
         transform.SetParent(target, true);
-        transform.localPosition = Vector3.zero+Vector3.up*2f;
+        transform.localPosition = Vector3.zero + Vector3.up*2f;
         currentTargetManager = target.GetComponent<CharacterManager>();
         isTargetSpotted = true;
+    }
+
+    public void RemoceCurrentTarget()
+    {
+        nearTargets.Remove(currentTargetManager);
+        isTargetSpotted = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out CharacterManager characterManager))
         {
-            nearTargets.Add(characterManager.transform);
+            if (!characterManager.isDead && characterManager != ownerManager)
+
+                nearTargets.Add(characterManager);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out CharacterManager characterManager))
         {
-            nearTargets.Remove(characterManager.transform);
+            nearTargets.Remove(characterManager);
         }
     }
 }

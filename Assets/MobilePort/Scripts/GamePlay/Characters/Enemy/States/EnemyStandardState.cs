@@ -29,6 +29,13 @@ namespace CharacterBehaviour
         {
             enemyManager.SwitchCurrentState(enemyManager.dyingState);
         }
+        public override void InitState()
+        {
+           if(enemyTarget.currentTargetManager.isDead)
+            {
+                enemyTarget.RemoceCurrentTarget();
+            }
+        }
 
         public override void UpdateOwnerState()
         {
@@ -43,12 +50,10 @@ namespace CharacterBehaviour
                 characterAnimations.UpdateAnimatorParameters();
             }
 
-           
-          
-
             transform.rotation = Quaternion.LookRotation(new Vector3(targetTransform.position.x, transform.position.y ,targetTransform.position.z) - transform.position);
             
             _rigidbody.AddForce(0, -9.80665f, 0);
+
             if (_rigidbody.velocity.magnitude < maxMoveVelocity)
             {
                 _rigidbody.AddForce(transform.forward * _moveRate,ForceMode.Force);
@@ -56,8 +61,9 @@ namespace CharacterBehaviour
             }
 
 
-            if (enemyTarget.ownerDistance < attackDistance && enemyTarget.isTargetSpotted)
+            if (enemyTarget.distance < attackDistance && enemyTarget.isTargetSpotted)
             {
+
                 enemyManager.SwitchCurrentState(enemyManager.attackState);
 
             }
@@ -95,10 +101,6 @@ namespace CharacterBehaviour
      
         }
 
-        public override void InitState()
-        {
-           
-        }
 
         public override void CancelState()
         {
