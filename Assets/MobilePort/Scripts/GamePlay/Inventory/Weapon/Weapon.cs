@@ -96,6 +96,9 @@ public class Weapon : Item, IOffensive
         _collider.enabled = trigger;
         _currentSource = source;
         currentOpponent = null;
+        
+        if (!IsServer) return;
+
         if (trigger)
         {
             CheckHitedReset();

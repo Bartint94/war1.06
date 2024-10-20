@@ -80,12 +80,12 @@ namespace CharacterBehaviour
             {
                 playerManager.SwitchCurrentState(playerManager.blockState);
             }
-
-
-            if(Input.GetKeyDown(KeyCode.K)) 
+            if (playerManager.myHealth.health <= 0)
             {
                 playerManager.SwitchCurrentState(playerManager.dyingState);
             }
+
+           
 
 
         }

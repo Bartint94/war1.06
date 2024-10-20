@@ -66,11 +66,12 @@ namespace CharacterBehaviour
             
             poolzSystem = PoolzSystem.instance;
         }
-        private void Update()
+        protected virtual void Update()
         {
+            SurfaceAligment();
+
             if(IsOwner)
             {
-                SurfaceAligment();
                 playerInputs.UpdateInputs();
                 playerLook.Look();
             }

@@ -78,6 +78,7 @@ namespace CharacterBehaviour
             myHealth = GetComponent<Health>();
             getHitState = GetComponent<GetHitState>();
             animations = GetComponent<CharacterAnimations>();
+            dyingState = GetComponent<DyingState>();
         }
         public virtual void SwitchCurrentState(CharacterState state, string debug = "charscter")
         {

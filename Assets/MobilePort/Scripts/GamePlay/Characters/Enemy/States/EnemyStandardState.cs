@@ -32,6 +32,11 @@ namespace CharacterBehaviour
 
         public override void UpdateOwnerState()
         {
+            if (enemyManager.myHealth.health <= 0)
+            {
+                enemyManager.SwitchCurrentState(enemyManager.dyingState);
+                return;
+            }
             if (characterManager.IsGrounded)
             {
                 characterAnimations.CalculateDirectionSpeed();
@@ -56,8 +61,7 @@ namespace CharacterBehaviour
                 enemyManager.SwitchCurrentState(enemyManager.attackState);
 
             }
-            
-            
+
         }
 
         public override void UpdateServerState()

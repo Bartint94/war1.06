@@ -10,43 +10,32 @@ namespace CharacterBehaviour
 {
     public class DyingState : CharacterState
     {
-        [SerializeField] Rigidbody[] ragdolRigidBody;
-        [SerializeField] Collider[] ragdolColliders;
-
+  
         SceneController _sceneController;
         
 
-        protected override void Awake()
-        {
-            base.Awake();
-            ragdolRigidBody = GetComponentsInChildren<Rigidbody>();
-            ragdolColliders = GetComponentsInChildren<Collider>();
-            RagdolOfflineToggle(false);
-        }
+
+        
         public override void OnStartClient()
         {
             base.OnStartClient();
-            RagdollServerToggle(false);
+            
             _sceneController = FindObjectOfType<SceneController>();
         }
         
         public override void InitState()
         {
-            RagdollServerToggle(true);
-            if(enemyManager != null)
-            {
-              //  enemyManager.Death();
-            }
-            if(playerManager != null)
-            {
-                Invoke(nameof(SwitchScene), 5f);
-            }
+            characterManager.Horizontal = 0;
+            characterManager.Vertical = 0;
+            characterAnimations.BoolAnimationServer(true, BoolAnimationType.die);
         }
-        public async Task SwitchScene()
+
+        protected override void Update()
         {
-            if (_sceneController.IsLoading == false)
-                await _sceneController.SwitchScene(Scenes.menu);
+
         }
+
+
         public override void AnimationEnd()
         {
             
@@ -72,59 +61,6 @@ namespace CharacterBehaviour
         {
             
         }
-        [ServerRpc(RequireOwnership = false)]
-        void RagdollServerToggle(bool isRagdoll)
-        {
-            RagdolObserverToggle(isRagdoll);
-        }
-        [ObserversRpc]
-        void RagdolObserverToggle(bool isRagdol)
-        {
-            for (int i = 1; i < ragdolRigidBody.Length; i++)
-            {
-                if (ragdolRigidBody[i] != null)
-                    ragdolRigidBody[i].isKinematic = !isRagdol;
-            }
-            for (int i = 2; i < ragdolColliders.Length; i++)
-            {
-                if (ragdolColliders[i] != null)
-                    ragdolColliders[i].isTrigger = !isRagdol;
-            }
-            //characterAnimations.GetComponent<NetworkAnimator>().enabled = !isRagdol;
-            characterAnimations.GetComponent<Animator>().enabled = !isRagdol;
-            
-            if(isRagdol)
-            {
-                if(enemyManager != null)
-                {
-                   // if(enemyManager.enemyTarget  != null)
-                    
-                   //     Destroy(enemyManager.enemyTarget.gameObject);
-                }
-            }
-        }
-        void RagdolOfflineToggle(bool isRagdol)
-        {
-
-            for (int i = 1; i < ragdolRigidBody.Length; i++)
-            {
-                ragdolRigidBody[i].isKinematic = !isRagdol;
-            }
-            for (int i = 2; i < ragdolColliders.Length; i++)
-            {
-                ragdolColliders[i].isTrigger = !isRagdol;
-            }
-            //characterAnimations.GetComponent<NetworkAnimator>().enabled = !isRagdol;
-            characterAnimations.GetComponent<Animator>().enabled = !isRagdol;
-
-            if (isRagdol)
-            {
-                if (enemyManager != null)
-                {
-                 //  Destroy(enemyManager.enemyTarget.gameObject);
-                }
-            }
-        }
 
         public override void UpdateOwnerState()
         {
@@ -138,7 +74,12 @@ namespace CharacterBehaviour
 
         public override void CancelState()
         {
-            throw new System.NotImplementedException();
+            
+        }
+        public async Task SwitchScene()
+        {
+            if (_sceneController.IsLoading == false)
+                await _sceneController.SwitchScene(Scenes.menu);
         }
     }
 

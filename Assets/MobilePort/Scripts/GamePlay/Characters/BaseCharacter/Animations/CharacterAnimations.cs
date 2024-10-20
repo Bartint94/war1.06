@@ -5,7 +5,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 public enum AttackType { standard, heavy}
-public enum BoolAnimationType { jump, getHit }
+public enum BoolAnimationType { jump, getHit ,die }
 public class CharacterAnimations : NetworkBehaviour
 {
 
@@ -41,7 +41,8 @@ public class CharacterAnimations : NetworkBehaviour
     private float distanceToGround;
 
     bool isGrounded;
-    
+    private bool isDie;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -161,8 +162,9 @@ public class CharacterAnimations : NetworkBehaviour
         _animator.SetFloat("horizontal", speedVelocityX, 0.1f, Time.deltaTime);
 
         _animator.SetBool("jump", isJump);
+        _animator.SetBool("isDie", isDie);
 
-      
+
         _animator.SetBool("switch", isSwitch);
         _animator.SetBool("getHit", isGetHit);
 
@@ -210,6 +212,9 @@ public class CharacterAnimations : NetworkBehaviour
 
         if (type == BoolAnimationType.jump)
             isJump = value;
+
+        if (type == BoolAnimationType.die)
+            isDie = value;
 
         //StartCoroutine(ResetAttackId());
     }

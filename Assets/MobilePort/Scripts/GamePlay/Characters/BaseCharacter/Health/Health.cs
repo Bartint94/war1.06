@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Health : NetworkBehaviour
 {
-    [SerializeField] int health = 100;
+    public int health = 100;
     int maxHeath;
     [SerializeField] RectTransform healthBar;
     CharacterManager stateManager;
@@ -22,13 +22,14 @@ public class Health : NetworkBehaviour
     {
 
         health += value;
+        if(health < 0)
+        {
+            health = 0;
+        }
         float axHeath=  (float)health/(float)maxHeath;
         
         healthBar.SetScale(new Vector3(axHeath,1f,1f));
 
-        if (health <= 0)
-        {
-            stateManager.SwitchCurrentState(stateManager.dyingState);
-        }
+        
     }
 }

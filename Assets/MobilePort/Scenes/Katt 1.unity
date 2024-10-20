@@ -5224,25 +5224,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1398490485754560506, guid: 085f78ec6fc16724e912f36634de6ddf, type: 3}
-      propertyPath: _scenePathHash
-      value: 3583711989
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398490485754560506, guid: 085f78ec6fc16724e912f36634de6ddf, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 15391925791383370219
       objectReference: {fileID: 0}
     - target: {fileID: 6124020649145926685, guid: 085f78ec6fc16724e912f36634de6ddf, type: 3}
       propertyPath: m_Name
       value: Bot
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055252167553610367, guid: 085f78ec6fc16724e912f36634de6ddf, type: 3}
-      propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'Root'\n\tTransform 'hand_r'\n\tTransform
-        'upperarm_l'\n\tTransform 'calf_l'\n\tTransform 'upperarm_r'\n\tTransform
-        'thigh_l'\n\tTransform 'lowerarm_r'\n\tTransform 'neck_01'\n\tTransform 'Root'\n\tTransform
-        'spine_03'\n\tand more ...\n\tFrom animation clip 'R'"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

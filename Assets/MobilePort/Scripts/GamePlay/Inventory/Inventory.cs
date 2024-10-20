@@ -136,7 +136,7 @@ public class Inventory : NetworkBehaviour
 
 
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void WeaponTriggerToggleServer(bool turn,WeaponState wepaonState)
     {
         if (characterStateManager.currentState == characterStateManager.getHitState)
