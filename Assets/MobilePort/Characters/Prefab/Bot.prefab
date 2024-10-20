@@ -236,7 +236,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &5574768742048576020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,10 +264,12 @@ MonoBehaviour:
   standardState: {fileID: 3223281787410540830}
   dodgeState: {fileID: 3567741987551908238}
   dyingState: {fileID: 1533975841925309217}
+  animations: {fileID: 0}
   rigs: {fileID: 7759820615793686976}
   myHealth: {fileID: 0}
   _moveRate: 20
   isDistanceFighting: 0
+  isBot: 0
   IsGrounded: 0
   sourceObject: {fileID: 0}
   enemyTarget: {fileID: 5557835015237195718}
@@ -348,9 +350,24 @@ MonoBehaviour:
   - {fileID: 2866585234170376489}
   - {fileID: 1103234809631339131}
   - {fileID: 5557835015237195718}
+  - {fileID: 8042947819500228121}
+  - {fileID: 1514520581712937210}
+  - {fileID: 4938838808318979229}
+  - {fileID: 3258368501450644591}
+  - {fileID: 6663199688998619183}
+  - {fileID: 7596479917108026731}
+  - {fileID: 7008694963486160632}
+  - {fileID: 7180096934717186688}
+  - {fileID: 7215163641987880984}
+  - {fileID: 3567496640057246501}
+  - {fileID: 1621793491096164581}
+  - {fileID: 363726118285706997}
+  - {fileID: 5059554733090038363}
+  - {fileID: 1026408445342711797}
+  - {fileID: 8890468301363257947}
+  - {fileID: 4771899320305366339}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
-  <ChildNetworkObjects>k__BackingField:
-  - {fileID: 0}
+  <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -763,9 +780,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3973cc4f6ee0bcb4eb1c1a86aa6d1a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
+  _componentIndexCache: 16
   _addedNetworkObject: {fileID: 1398490485754560506}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 1398490485754560506}
   myWeapon: {fileID: 0}
 --- !u!1 &7775335199114904657
 GameObject:

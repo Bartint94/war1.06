@@ -18,12 +18,11 @@ public class PlayerManager : CharacterManager
     #endregion
 
 
-    public CharacterAnimations animations;
+    
 
     public Transform camTransform;
 
 
-    public float moveRate;
     public float maxSpeed;
 
     public float playerRotY;
@@ -49,7 +48,7 @@ public class PlayerManager : CharacterManager
         standardState = GetComponent<PlayerStandardState>();
         blockState = GetComponent<PlayerBlockState>();
 
-        animations = GetComponent<CharacterAnimations>();
+        
 
         currentState = standardState;
         currentState.InitState();

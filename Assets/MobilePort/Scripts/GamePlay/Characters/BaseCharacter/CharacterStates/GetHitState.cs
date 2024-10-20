@@ -38,7 +38,8 @@ namespace CharacterBehaviour
         public override void InitState()
         {
           
-            if (IsOwner)
+          
+            if (IsOwner || characterManager.isBot)
             {
                 //characterManager.RootMotionDirection = direction;
                 Debug.Log($"direction  = {direction}");
@@ -67,12 +68,14 @@ namespace CharacterBehaviour
         public override void UpdateOwnerState()
         {
 
-            if (IsOwner)
+            if (IsOwner || characterManager.isBot)
             {
-                playerManager.DashForce = playerManager.animations.RootMotionUpdate() * rootMotionMultipiler;
+                characterManager.DashForce = characterManager.animations.RootMotionUpdate() * rootMotionMultipiler;
                 characterAnimations.CalculateDirectionSpeed();
                 characterAnimations.UpdateAnimatorParameters();
-                playerLook.Look();
+
+                if (IsOwner)
+                    playerLook.Look();
 
                 weight -= RigWeight(getHitTime);
 

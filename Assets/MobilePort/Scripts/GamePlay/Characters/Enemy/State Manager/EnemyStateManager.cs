@@ -26,6 +26,7 @@ namespace CharacterBehaviour
         {
             base.Awake();
             SwitchCurrentState(standardState);
+            isBot = true;
         }
         public override void SwitchCurrentState(CharacterState state, string debug = "charscter")
         {

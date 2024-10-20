@@ -26,7 +26,7 @@ public class EventHandler : NetworkBehaviour
     }
     public void End()
     {
-        if (IsOwner)
+        if (IsOwner || manager.isBot)
         {
             
             manager.SwitchCurrentState(manager.standardState);

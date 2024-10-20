@@ -107,7 +107,9 @@ public class HitBox : NetworkBehaviour
 
         manager._rigidbody.AddForce(dir * dmg, ForceMode.Impulse);
 
-        if (IsOwner)
+        
+
+        if (IsOwner || manager.isBot)
         {
             //manager.getHitState.direction = dir;
             manager.getHitState.hitPosition = source;

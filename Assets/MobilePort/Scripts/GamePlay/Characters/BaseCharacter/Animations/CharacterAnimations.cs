@@ -181,7 +181,7 @@ public class CharacterAnimations : NetworkBehaviour
 
 
 
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void AttackIdServer(int id, AttackType type = AttackType.standard)
     {
         AttackIdObservers(id, type);
@@ -197,7 +197,7 @@ public class CharacterAnimations : NetworkBehaviour
 
         //StartCoroutine(ResetAttackId());
     }
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void BoolAnimationServer(bool value, BoolAnimationType type)
     {
         BoolAnimationObservers(value, type);

@@ -24,14 +24,16 @@ namespace CharacterBehaviour
         public CharacterState standardState;
         public DodgeState dodgeState;
         public DyingState dyingState;
-        
 
+        public CharacterAnimations animations;
         public CharacterAnimationRiging rigs;
         public Health myHealth;
 
-        public float _moveRate = 15f;
+        public float moveRate = 15f;
 
         public bool isDistanceFighting;
+
+        public bool isBot;
 
 
 
@@ -75,6 +77,7 @@ namespace CharacterBehaviour
             _rigidbody = GetComponent<Rigidbody>();
             myHealth = GetComponent<Health>();
             getHitState = GetComponent<GetHitState>();
+            animations = GetComponent<CharacterAnimations>();
         }
         public virtual void SwitchCurrentState(CharacterState state, string debug = "charscter")
         {

@@ -134,8 +134,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0021555892, y: 0.0019617355, z: 0.0009196377}
-  m_Center: {x: 0.000035036184, y: 0.0019028421, z: 0.000040159604}
+  m_Size: {x: 0.0021555894, y: 0.00437658, z: 0.0009196377}
+  m_Center: {x: 0.000035036206, y: 0.00069541635, z: 0.000040156872}
 --- !u!114 &1602772715516447780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,9 +156,9 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    LocalScale: {x: 0, y: 0, z: 0}
+    Position: {x: 0.007, y: 0.166, z: 0.17}
+    Rotation: {x: 0.45749438, y: -0.6124637, z: -0.42435634, w: 0.4852925}
+    LocalScale: {x: 300, y: 200, z: 200}
   _isNetworked: 1
   _isGlobal: 0
   _initializeOrder: 0

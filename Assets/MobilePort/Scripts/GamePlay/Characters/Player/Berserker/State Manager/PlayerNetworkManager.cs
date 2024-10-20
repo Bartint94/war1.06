@@ -270,7 +270,7 @@ namespace CharacterBehaviour
                 {
 
 
-                    locomotionForces = (transform.forward * md.Vertical) + (transform.right * md.Horizontal);// * _moveRate;
+                    locomotionForces = (transform.forward * md.Vertical) + (transform.right * md.Horizontal*.7f);// * moveRate;
                                                                                                              // locomotionForces.Normalize();
 
                     if (!md.IsStoped)

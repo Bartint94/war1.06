@@ -87,11 +87,11 @@ public class CameraController : MonoBehaviour
     {
         if (currentFollowObject == null) { return; }
 
-        
 
-      //  float speed = Vector3.Distance(transform.position, standardFollowObject.position) * speedMultipiler;
+
+        //  float speed = Vector3.Distance(transform.position, standardFollowObject.position) * speedMultipiler;
         //transform.position = Vector3.MoveTowards(transform.position, standardFollowObject.position + Vector3.up, speed * Time.deltaTime);
-        transform.position = Vector3.SmoothDamp(transform.position, currentFollowObject.transform.position,ref refVelocity, followSpeed * Time.deltaTime);
+        transform.position = Vector3.Slerp(transform.position, currentFollowObject.transform.position, followSpeed * Time.deltaTime);//Vector3.SmoothDamp(transform.position, currentFollowObject.transform.position,ref refVelocity, followSpeed * Time.deltaTime);
 
     }
    
