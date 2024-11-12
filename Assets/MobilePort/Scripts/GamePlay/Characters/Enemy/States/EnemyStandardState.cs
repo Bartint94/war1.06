@@ -31,10 +31,11 @@ namespace CharacterBehaviour
         }
         public override void InitState()
         {
-           if(enemyTarget.currentTargetManager.isDead)
-            {
-                enemyTarget.RemoceCurrentTarget();
-            }
+            if (enemyTarget.currentTargetManager)
+                if (enemyTarget.currentTargetManager.isDead)
+                {
+                    enemyTarget.RemoceCurrentTarget();
+                }
         }
 
         public override void UpdateOwnerState()

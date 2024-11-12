@@ -269,6 +269,7 @@ MonoBehaviour:
   moveRate: 15
   isDistanceFighting: 0
   isBot: 0
+  isDead: 0
   IsGrounded: 0
   sourceObject: {fileID: 0}
   enemyTarget: {fileID: 5557835015237195718}
@@ -521,7 +522,7 @@ MonoBehaviour:
   _componentIndexCache: 8
   _addedNetworkObject: {fileID: 1398490485754560506}
   _networkObjectCache: {fileID: 1398490485754560506}
-  health: 100
+  health: 200
   healthBar: {fileID: 88234406750223063}
 --- !u!114 &7759820615793686976
 MonoBehaviour:
@@ -796,7 +797,7 @@ MonoBehaviour:
   randDistance: 10
   ownerManager: {fileID: 5574768742048576020}
   currentTargetManager: {fileID: 0}
-  ownerDistance: 0
+  distance: 0
   ownerY: 0
   nearTargets: []
   angle: 0

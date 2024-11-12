@@ -97,7 +97,7 @@ ModelImporter:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.43888888
+            time: 0.40316805
             value: 0
             inSlope: -0.009072512
             outSlope: -0.96922386
@@ -106,8 +106,8 @@ ModelImporter:
             inWeight: 0.5575481
             outWeight: 0.43569317
           - serializedVersion: 3
-            time: 0.5739289
-            value: -0.076328754
+            time: 0.53376776
+            value: -0.27025145
             inSlope: -0.95945555
             outSlope: 1.8592993
             tangentMode: 1
@@ -124,23 +124,14 @@ ModelImporter:
             inWeight: 0.7367425
             outWeight: 0.40600708
           - serializedVersion: 3
-            time: 0.76053804
-            value: 0.0616095
-            inSlope: 0.18615454
-            outSlope: -1.0186559
+            time: 0.8565246
+            value: 0.0062570255
+            inSlope: 0.15804893
+            outSlope: 2.2813146
             tangentMode: 1
             weightedMode: 0
-            inWeight: 0.91873866
-            outWeight: 0.27292362
-          - serializedVersion: 3
-            time: 1
-            value: 0
-            inSlope: -0.0382599
-            outSlope: -0.0382599
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.45675313
-            outWeight: 0
+            inWeight: 1
+            outWeight: 0.19264154
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 4
@@ -166,7 +157,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.60580605
+      - time: 0.64298075
         functionName: End
         data: 
         objectReferenceParameter: {instanceID: 0}

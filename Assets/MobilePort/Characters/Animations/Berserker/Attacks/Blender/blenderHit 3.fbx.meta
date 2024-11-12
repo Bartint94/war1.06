@@ -62,7 +62,7 @@ ModelImporter:
           curve:
           - serializedVersion: 3
             time: 0
-            value: -1
+            value: -0.6
             inSlope: -0.25194559
             outSlope: -0.25194559
             tangentMode: 0
@@ -88,22 +88,13 @@ ModelImporter:
             inWeight: 0.14570922
             outWeight: 0.47251716
           - serializedVersion: 3
-            time: 0.8366199
-            value: 0
-            inSlope: 0.010578451
-            outSlope: 2.374605
-            tangentMode: 1
-            weightedMode: 0
-            inWeight: 0.77356905
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.9977722
+            time: 1
             value: 0.5
-            inSlope: 2.869184
-            outSlope: 2.869184
+            inSlope: 6.243597
+            outSlope: 6.243597
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.41556105
+            inWeight: 0.12245141
             outWeight: 0
           preInfinity: 3
           postInfinity: 3
@@ -130,7 +121,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.89221317
+      - time: 0.9925849
         functionName: End
         data: 
         objectReferenceParameter: {instanceID: 0}

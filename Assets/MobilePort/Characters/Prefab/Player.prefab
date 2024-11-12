@@ -886,6 +886,7 @@ MonoBehaviour:
   moveRate: 20
   isDistanceFighting: 0
   isBot: 0
+  isDead: 0
   IsGrounded: 0
   attackState: {fileID: 0}
   fastAttackState: {fileID: 0}
@@ -1206,7 +1207,7 @@ MonoBehaviour:
   _componentIndexCache: 13
   _addedNetworkObject: {fileID: 1398490485754560506}
   _networkObjectCache: {fileID: 1398490485754560506}
-  health: 30
+  health: 200
   healthBar: {fileID: 6081940127767991057}
 --- !u!114 &2554555448102448053
 MonoBehaviour:
