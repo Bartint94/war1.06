@@ -797,7 +797,7 @@ MonoBehaviour:
   randDistance: 10
   ownerManager: {fileID: 5574768742048576020}
   currentTargetManager: {fileID: 0}
-  distance: 0
+  distance: 2
   ownerY: 0
   nearTargets: []
   angle: 0
